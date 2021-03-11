@@ -23,6 +23,14 @@
                 <role>developer</role>
             </roles>
         </developer>
+        <developer>
+            <id>antsandur1</id>
+            <name>Antonio Luis Santervás Durán</name>
+            <email>antsandur1@alum.us.es</email>
+            <roles>
+                <role>developer</role>
+            </roles>
+</developer>
         
     </developers>
 
