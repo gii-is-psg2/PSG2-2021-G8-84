@@ -13,6 +13,18 @@
         <version>2.2.4.RELEASE</version>
     </parent>
     <name>petclinic</name>
+    
+    <developers>
+        <developer>
+            <id>abrcobgal</id>
+            <name>Abraham Cobelo Galindo</name>
+            <email>abrcobgal@alum.us.es</email>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        
+    </developers>
 
     <properties>
 
