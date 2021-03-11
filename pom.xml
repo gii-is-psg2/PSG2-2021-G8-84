@@ -30,7 +30,7 @@
             <roles>
                 <role>developer</role>
             </roles>
-</developer>
+        </developer>
         
         <developer>
             <id>mangarmar17</id>
@@ -41,6 +41,14 @@
             </roles>
         </developer>
         
+        <developer>
+            <id>hergonpen</id>
+            <name>Hernán González Peñalver</name>
+            <email>hergonpen@alum.us.es</email>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <properties>
