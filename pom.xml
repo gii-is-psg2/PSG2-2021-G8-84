@@ -23,6 +23,7 @@
                 <role>developer</role>
             </roles>
         </developer>
+        
         <developer>
             <id>antsandur1</id>
             <name>Antonio Luis Santervás Durán</name>
@@ -45,6 +46,15 @@
             <id>hergonpen</id>
             <name>Hernán González Peñalver</name>
             <email>hergonpen@alum.us.es</email>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        
+        <developer>
+            <id>antvinper</id>
+            <name>Antonio Viñuelas Perales</name>
+            <email>antvinper@alum.us.es</email>
             <roles>
                 <role>developer</role>
             </roles>
