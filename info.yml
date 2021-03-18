@@ -4,7 +4,7 @@ project:
    teamId: '84'
    indentities:
       github:
-          url: 'https://github.com/gii-is-psg2/spring-petclinic'
+          url: 'https://github.com/gii-is-psg2/PSG2-2021-G8-84'
       members:
           member1:
               name: 'Hernán'
