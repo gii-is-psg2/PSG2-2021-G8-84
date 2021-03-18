@@ -1,0 +1,28 @@
+project:
+  name: 'PSG2-2021-G8-84 Petclinic'
+  owner: 'L8'
+  teamId: '84'
+  identities:
+    github:
+      url: 'https://github.com/gii-is-psg2/PSG2-2021-G8-84'
+  members:
+    member1:
+      name: 'Hernán'
+      surname: 'González' 
+      githubUsername: 'HernanGonzalez42'
+    member2:
+      name: 'Manuel'
+      surname: 'García'
+      githubUsername: 'mangarmar'
+    member3:
+      name: 'Antonio'
+      surname: 'Santervas'
+      githubUsername: 'antsandur1'
+    member4:
+      name: 'Antonio'
+      surname: 'Viñuelas'
+      githubUsername: 'antvinper'
+    member5:
+      name: 'Abraham'
+      surname: 'Cobelo'
+      githubUsername: 'abrcobgal'
