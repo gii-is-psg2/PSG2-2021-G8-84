@@ -55,5 +55,15 @@ public class VetService {
 	public Collection<Vet> findVets() throws DataAccessException {
 		return vetRepository.findAll();
 	}	
+	
+	@Transactional
+	public void saveVet(Vet vet) throws DataAccessException {
+          vetRepository.save(vet);                
+	}
+	
+	@Transactional(readOnly = true)
+	public Vet findVetById(int id) {
+		return vetRepository.findById(id);
+	}
 
 }
