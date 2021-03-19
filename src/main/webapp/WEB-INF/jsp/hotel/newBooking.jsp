@@ -1,0 +1,94 @@
+<%@ page session="false" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
+
+
+
+
+<petclinic:layout pageName="Bookings">
+	<jsp:attribute name="customScript">
+        <script>
+									
+								 	
+         $(function() {
+        	  $("#startDate").datepicker({
+        		  dateFormat : 'yy/mm/dd',
+				    beforeShowDay: function(date) {
+				    
+				  fecha = new Date(date)
+				    	fecha.setMonth(date.getMonth()+1);
+				      if ( ${restriccion}     ) {
+				        return [false, "CSSclass", "disabled"];
+				      } else {
+				        return [true, '', ''];
+				      }
+				    }
+				  });
+        	   $("#startDate").attr("readonly","readonly");
+				  $("#endDate").attr("readonly","readonly"); 
+										
+											  $("#endDate").datepicker({
+												  dateFormat : 'yy/mm/dd',
+											    beforeShowDay: function(date) {
+											    	fecha = new Date(date)
+											    	fecha.setMonth(date.getMonth()+1);
+											    
+											      if (${restriccion} ) {
+											        return [false, "CSSclass", "disabled"];
+											      } else {
+											        return [true, '', ''];
+											      }
+											    }
+											  });
+											});
+										
+									
+									
+									
+									
+								</script>	
+    </jsp:attribute>
+	<jsp:body>
+	
+        
+<!--  Hay que enviar los datos de owner, pet, fecha inicio y fecha fin-->
+        
+
+        <form:form modelAttribute="hotel" class="form-horizontal">
+			 <input type="hidden" name="ownerId" value="${owner.id}" />
+            <div class="form-group has-feedback">
+                <petclinic:inputField label="Start Date"
+					name="startDate" />
+                <petclinic:inputField label="End Date" name="endDate" />
+                
+                <spring:bind path="pet">  
+                  <label for="pet">Choose your pet:</label>
+                        <select name="pet">
+   						 <c:forEach items="${pets}" var="pet">  
+   						 <option value="${pet.id}">${pet.name} 	
+						
+						
+						
+						</c:forEach>
+    </select>
+		
+				</spring:bind>
+		
+				
+            <br> 
+               
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">                   
+                  
+                    <button class="btn btn-default" type="submit">Save booking</button>
+                </div>
+            </div>
+        </form:form>
+    
+    </jsp:body>
+
+</petclinic:layout>

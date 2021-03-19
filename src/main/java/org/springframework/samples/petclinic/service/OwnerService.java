@@ -16,6 +16,8 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -30,6 +32,9 @@ import org.springframework.samples.petclinic.repository.PetRepository;
 import org.springframework.samples.petclinic.repository.VetRepository;
 import org.springframework.samples.petclinic.repository.VisitRepository;
 import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -75,5 +80,25 @@ public class OwnerService {
 		//creating authorities
 		authoritiesService.saveAuthorities(owner.getUser().getUsername(), "owner");
 	}		
+	
+	public Integer getOwnerId() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Object sesion = auth.getPrincipal();
+		UserDetails us = null;
+		if (sesion instanceof UserDetails) {
+			us = (UserDetails) sesion;
+		}
+		String res = us.getUsername();		
+
+			Owner o = (ownerRepository.findAllOwners().stream().filter(x -> x.getUser().getUsername().equals(res)))
+					.collect(Collectors.toList()).get(0);
+			Integer ownerId = o.getId();
+		return ownerId;
+
+	}
+	
+	public List<Pet> petsByOwner(Owner owner){
+		return owner.getPets();
+	}
 
 }
