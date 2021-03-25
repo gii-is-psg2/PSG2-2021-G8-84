@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.service.AuthoritiesService;
 import org.springframework.samples.petclinic.service.OwnerService;
+import org.springframework.samples.petclinic.service.PetService;
 import org.springframework.samples.petclinic.service.VetService;
 import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -45,10 +46,13 @@ public class OwnerController {
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
 
 	private final OwnerService ownerService;
+	
+	private final PetService petService;
 
 	@Autowired
-	public OwnerController(OwnerService ownerService, UserService userService, AuthoritiesService authoritiesService) {
+	public OwnerController(OwnerService ownerService, PetService petService, UserService userService, AuthoritiesService authoritiesService) {
 		this.ownerService = ownerService;
+		this.petService = petService;
 	}
 
 	@InitBinder
@@ -140,5 +144,11 @@ public class OwnerController {
 		mav.addObject(this.ownerService.findOwnerById(ownerId));
 		return mav;
 	}
+	
+	@GetMapping(value = "/owners/{ownerId}/delete")
+    public String deleteCliente(@PathVariable("ownerId") int ownerId) {
+        this.ownerService.eliminarOwner(ownerId);
+        return "redirect:/owners/";
+    }
 
 }
