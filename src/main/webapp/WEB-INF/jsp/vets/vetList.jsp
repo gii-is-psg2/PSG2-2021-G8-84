@@ -11,9 +11,9 @@
     <table id="vetsTable" class="table table-striped">
         <thead>
         <tr>
-            <th>Nombre</th>
-            <th>Especialidades</th>
-            <th>Opciones</th>
+            <th>Name</th>
+            <th>Specialties</th>
+            <th>Options</th>
         </tr>
         </thead>
         <tbody>
@@ -30,7 +30,7 @@
                 </td>
                 <td>
                 	<spring:url value="/vets/{vetId}/edit" var="vetUrl"> <spring:param name="vetId" value="${vet.id}" />
-					</spring:url> <a href="${fn:escapeXml(vetUrl)}" class="btn btn-default">Editar</a>
+					</spring:url> <a href="${fn:escapeXml(vetUrl)}" class="btn btn-default">Edit vet</a>
 				</td>
             </tr>
         </c:forEach>
@@ -38,12 +38,9 @@
     </table>
 
     <table class="table-buttons">
-        <tr>
+        <tr>   
             <td>
-                <a href="<spring:url value="/vets.xml" htmlEscape="true" />">Ver como XML</a>
-            </td>    
-            <td>
-                <a href="<spring:url value="/vets/new" htmlEscape="true" />">Nuevo veterinario</a>
+                <a href="<spring:url value="/vets/new" htmlEscape="true" />" class="btn btn-default">Add a new vet</a>
             </td>        
         </tr>
     </table>

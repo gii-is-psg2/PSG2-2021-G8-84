@@ -15,7 +15,10 @@
  */
 package org.springframework.samples.petclinic.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,4 +30,6 @@ import javax.persistence.Table;
 @Table(name = "specialties")
 public class Specialty extends NamedEntity {
 
+	@ManyToMany(mappedBy="specialties")
+    private Set<Vet> vets;
 }
