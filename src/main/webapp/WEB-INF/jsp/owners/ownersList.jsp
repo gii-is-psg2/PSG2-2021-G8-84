@@ -16,6 +16,7 @@
 				<th>City</th>
 				<th style="width: 120px">Telephone</th>
 				<th>Pets</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,7 +36,7 @@
 							var="ownerUrl">
 							<spring:param name="ownerId" value="${owner.id}" />
 							</spring:url><a href="${fn:escapeXml(ownerUrl)}"
-						class="btn btn-default">Eliminar</a> 
+						class="btn btn-default">Delete</a> 
 					</td><!--
                 <td> 
                     <c:out value="${owner.user.username}"/> 

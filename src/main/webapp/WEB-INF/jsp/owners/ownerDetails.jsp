@@ -1,4 +1,3 @@
-<%@ page session="false" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -65,10 +64,11 @@
 						</dd>
 						<dt> Options </dt>
 						<dd>
-							<spring:url value="/pets/{petId}/delete" var="petUrl">
+							<spring:url value="/owners/{ownerId}/pets/{petId}/delete" var="petUrl">
 								<spring:param name="petId" value="${pet.id}" />
+								<spring:param name="ownerId" value="${owner.id}" />
 							</spring:url>
-							<a href="${fn:escapeXml(petUrl)}" class="btn btn-default">Eliminar</a>
+							<a href="${fn:escapeXml(petUrl)}" class="btn btn-default">Delete</a>
 						</dd>
 					</dl>
 				</td>
