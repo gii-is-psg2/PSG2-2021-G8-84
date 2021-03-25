@@ -16,6 +16,7 @@
 package org.springframework.samples.petclinic.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
@@ -61,4 +62,7 @@ public interface OwnerRepository extends Repository<Owner, Integer> {
 	public Owner findById(@Param("id") int id);
 	
 	void deleteById(int id) throws DataAccessException;
+
+	@Query("SELECT owner FROM Owner owner ")
+	List<Owner> findAllOwners() throws DataAccessException;
 }

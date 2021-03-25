@@ -32,6 +32,8 @@ class PetTypeFormatterTests {
 
 	private PetTypeFormatter petTypeFormatter;
 
+	private Locale e;
+
 	@BeforeEach
 	void setup() {
 		petTypeFormatter = new PetTypeFormatter(clinicService);
