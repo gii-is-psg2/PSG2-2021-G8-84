@@ -14,27 +14,8 @@
             <div class="form-group has-feedback">
                 <petclinic:inputField label="First Name" name="firstName"/>
                 <petclinic:inputField label="Last Name" name="lastName"/>
-                <%-- <spring:bind path="specialties">  
-                  <label for="specialties">Specialties:</label>
-                        <select name="specialties" multiple="multiple">
-   						 	<c:forEach items="${specs}" var="spec">  
-   								<option value="${spec.id}">${spec.name}</option>
-   							</c:forEach>
-   						</select>
-   				</spring:bind> --%>
                 <petclinic:selectFieldN label="Specialties" name="specialties" names="${specs}"></petclinic:selectFieldN>
-                <%-- <label>Specialties</label>
-                <select name="specialties" multiple="multiple">
-                	<c:forEach items="${specs}" var="especialidad">
- 						<option value="${especialidad}"><c:out value="${especialidad.name}" /></option>
-					</c:forEach>
-                </select> --%>
-                <%-- <label>Specialties</label>
- 					<select name="specialties" id="specialties" multiple>
- 						<c:forEach items="${specs}" var="especialidad">
- 							<option value="${especialidad.id}"><c:out value="${especialidad.name}" /></option>
-						</c:forEach>
- 					</select> --%>
+                <div style=text-align:right>Specialties: 1=radiology, 2=surgery, 3=dentistry</div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">

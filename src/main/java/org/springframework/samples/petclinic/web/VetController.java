@@ -15,7 +15,6 @@
  */
 package org.springframework.samples.petclinic.web;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Specialty;
 import org.springframework.samples.petclinic.model.Vet;
@@ -28,14 +27,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jdk.internal.jline.internal.Log;
-
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import javax.validation.Valid;
 
 /**
@@ -49,7 +46,6 @@ import javax.validation.Valid;
 public class VetController {
 
 	private static final String VIEWS_VET_CREATE_OR_UPDATE_FORM = "vets/createOrUpdateVetForm";
-	private static final String SPECIALTIES_FORM = "vets/manageSpecialtiesForm";
 	
 	private final VetService vetService;
 	private final SpecialtyService specialtyService;
@@ -93,45 +89,18 @@ public class VetController {
 	}
 	
 	@PostMapping(value = { "vets/new" })
-	public String processCreationVetForm(@Valid Vet vet, BindingResult result, ModelMap model) {
+	public String processCreationVetForm(@Valid Vet vet, @RequestParam(required = false) List<Specialty> specialties, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
 			model.put("vet", vet);
 			Collection<Specialty> specs = this.specialtyService.findSpecialties();
 			model.put("specs",specs);
 			return VIEWS_VET_CREATE_OR_UPDATE_FORM;
 		}else {
+			if(specialties != null) for(Specialty spec : specialties) vet.addSpecialty(spec);
 			this.vetService.saveVet(vet);
-//			return "redirect:/vets/" + vet.getId() + "/newSpecialties";
 			return "redirect:/vets";
 		}
 	}
-	
-//	@GetMapping(value = { "vets/{vetId}/newSpecialties" })
-//	public String initCreationVetSpecialties(@PathVariable("vetId") int vetId, ModelMap model) {
-//		Vet vet = this.vetService.findVetById(vetId);
-//		model.put("vet",vet);
-//		Collection<Specialty> specs = this.specialtyService.findSpecialties();
-//		model.put("specs",specs);
-//		return SPECIALTIES_FORM;
-//	}
-//	
-//	@PostMapping(value = { "vets/{vetId}/newSpecialties" })
-//	public String processCreationVetSpecialties(@Valid Set<Specialty> specialties, BindingResult result,
-//			@PathVariable("vetId") int vetId, ModelMap model) {
-//		if(result.hasErrors()) {
-//			model.put("vet", this.vetService.findVetById(vetId));
-//			Collection<Specialty> specs = this.specialtyService.findSpecialties();
-//			model.put("specs",specs);
-//			return SPECIALTIES_FORM;
-//		}else {
-//			Vet vetToUpdate=this.vetService.findVetById(vetId);
-//			for (Specialty spec : specialties) {
-//				vetToUpdate.addSpecialty(spec);
-//			}
-//			this.vetService.saveVet(vetToUpdate);
-//			return "redirect:/vets";
-//		}
-//	}
 
 	//Editar un veterinario
 	@GetMapping(value = { "vets/{vetId}/edit" })
@@ -144,47 +113,18 @@ public class VetController {
 	}
 	
 	@PostMapping(value = { "vets/{vetId}/edit" })
-	public String processUpdateVetForm(@Valid Vet vet, BindingResult result,
-			@PathVariable("vetId") int vetId, ModelMap model) {
+	public String processUpdateVetForm(@Valid Vet vet, @RequestParam(required = false) List<Specialty> specialties,
+			BindingResult result, @PathVariable("vetId") int vetId, ModelMap model) {
 		if(result.hasErrors()) {
 			model.put("vet", vet);
 			Collection<Specialty> specs = this.specialtyService.findSpecialties();
 			model.put("specs",specs);
 			return VIEWS_VET_CREATE_OR_UPDATE_FORM;
 		}else {
-//			Vet vetToUpdate=this.vetService.findVetById(vetId);
-//			BeanUtils.copyProperties(vet, vetToUpdate, "id");
-			Log.info("Tamaño de la lista");
+			if(specialties != null) for(Specialty spec : specialties) vet.addSpecialty(spec);
 			this.vetService.saveVet(vet);
-//			return "redirect:/vets/{vetId}/editSpecialties";
 			return "redirect:/vets";
 		}
 	}
 	
-//	@GetMapping(value = { "vets/{vetId}/editSpecialties" })
-//	public String initUpdateVetSpecialties(@PathVariable("vetId") int vetId, ModelMap model) {
-//		Vet vet = this.vetService.findVetById(vetId);
-//		model.put("vet",vet);
-//		Collection<Specialty> specs = this.specialtyService.findSpecialties();
-//		model.put("specs",specs);
-//		return SPECIALTIES_FORM;
-//	}
-//	
-//	@PostMapping(value = { "vets/{vetId}/editSpecialties" })
-//	public String processUpdateVetSpecialties(Set<Specialty> specialties, BindingResult result,
-//			@PathVariable("vetId") int vetId, ModelMap model) {
-//		if(result.hasErrors()) {
-//			model.put("vet", this.vetService.findVetById(vetId));
-//			Collection<Specialty> specs = this.specialtyService.findSpecialties();
-//			model.put("specs",specs);
-//			return SPECIALTIES_FORM;
-//		}else {
-//			Vet vetToUpdate=this.vetService.findVetById(vetId);
-//			for (Specialty spec : specialties) {
-//				vetToUpdate.addSpecialty(spec);
-//			}
-//			this.vetService.saveVet(vetToUpdate);
-//			return "redirect:/vets";
-//		}
-//	}
 }
