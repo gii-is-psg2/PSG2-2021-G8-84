@@ -32,7 +32,7 @@ public class PetHotelService {
 
 	public boolean validBooking(Hotel hotel) {
 		if (hotel.getStartDate() != null && hotel.getEndDate()!=null) {
-			Boolean numberOfBookings = numberOfBookingsForPet(hotel.getPet().getId()) <= 1;
+			Boolean numberOfBookings = numberOfBookingsForPet(hotel.getPet().getId()) < 1;
 			Boolean startDate = hotel.getStartDate().isAfter(LocalDate.now());
 			Boolean endDate = hotel.getEndDate().isAfter(hotel.getStartDate());
 
