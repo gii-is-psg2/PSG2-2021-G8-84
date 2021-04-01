@@ -57,8 +57,18 @@ public class VetService {
 	}	
 	
 	@Transactional
-    public void eliminarVet(int id) throws DataAccessException{
-        this.vetRepository.deleteById(id);
-    }
+	public void saveVet(Vet vet) throws DataAccessException {
+          vetRepository.save(vet);                
+	}
+	
+	@Transactional(readOnly = true)
+	public Vet findVetById(int id) {
+		return vetRepository.findById(id);
+	}
+  
+  @Transactional
+  public void eliminarVet(int id) throws DataAccessException{
+      this.vetRepository.deleteById(id);
+  }
 
 }

@@ -16,14 +16,24 @@
 package org.springframework.samples.petclinic.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Specialty;
+import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Vets;
+import org.springframework.samples.petclinic.service.SpecialtyService;
 import org.springframework.samples.petclinic.service.VetService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import javax.validation.Valid;
 
 /**
  * @author Juergen Hoeller
@@ -31,14 +41,19 @@ import java.util.Map;
  * @author Ken Krebs
  * @author Arjen Poutsma
  */
+
 @Controller
 public class VetController {
 
+	private static final String VIEWS_VET_CREATE_OR_UPDATE_FORM = "vets/createOrUpdateVetForm";
+	
 	private final VetService vetService;
+	private final SpecialtyService specialtyService;
 
 	@Autowired
-	public VetController(VetService clinicService) {
+	public VetController(VetService clinicService, SpecialtyService specialtyService) {
 		this.vetService = clinicService;
+		this.specialtyService = specialtyService;
 	}
 
 	@GetMapping(value = { "/vets" })
@@ -63,11 +78,63 @@ public class VetController {
 		vets.getVetList().addAll(this.vetService.findVets());
 		return vets;
 	}
+	
+	
+	//Crear un veterinario
+	@GetMapping(value = { "vets/new" })
+	public String initCreationVetForm(ModelMap model) {
+		Vet vet = new Vet();
+		model.put("vet", vet);
+		Collection<Specialty> specs = this.specialtyService.findSpecialties();
+		model.put("specs",specs);
+		return VIEWS_VET_CREATE_OR_UPDATE_FORM;
+	}
+	
+	@PostMapping(value = { "vets/new" })
+	public String processCreationVetForm(@Valid Vet vet, @RequestParam(required = false) List<Specialty> specialties, BindingResult result, ModelMap model) {
+		if(result.hasErrors() || vet.getFirstName().isEmpty() || vet.getLastName().isEmpty()) {
+			model.put("vet", vet);
+			model.addAttribute("message", "There are errors in creation vet form"); //mensaje error a traducir a español
+			Collection<Specialty> specs = this.specialtyService.findSpecialties();
+			model.put("specs",specs);
+			return VIEWS_VET_CREATE_OR_UPDATE_FORM;
+		}else {
+			if(specialties != null) for(Specialty spec : specialties) vet.addSpecialty(spec);
+			this.vetService.saveVet(vet);
+			return "redirect:/vets";
+		}
+	}
 
+	//Editar un veterinario
+	@GetMapping(value = { "vets/{vetId}/edit" })
+	public String initUpdateVetForm(@PathVariable("vetId") int vetId, ModelMap model) {
+		Vet vet = this.vetService.findVetById(vetId);
+		model.put("vet",vet);
+		Collection<Specialty> specs = this.specialtyService.findSpecialties();
+		model.put("specs",specs);
+		return VIEWS_VET_CREATE_OR_UPDATE_FORM;
+	}
+	
+	@PostMapping(value = { "vets/{vetId}/edit" })
+	public String processUpdateVetForm(@Valid Vet vet, @RequestParam(required = false) List<Specialty> specialties,
+			BindingResult result, @PathVariable("vetId") int vetId, ModelMap model) {
+		if(result.hasErrors() || vet.getFirstName().isEmpty() || vet.getLastName().isEmpty()) {
+			model.put("vet", vet);
+			model.addAttribute("message", "There are errors in update vet form"); //mensaje error a traducir a español
+			Collection<Specialty> specs = this.specialtyService.findSpecialties();
+			model.put("specs",specs);
+			return VIEWS_VET_CREATE_OR_UPDATE_FORM;
+		}else {
+			if(specialties != null) for(Specialty spec : specialties) vet.addSpecialty(spec);
+			this.vetService.saveVet(vet);
+			return "redirect:/vets";
+		}
+	}
+	
+  //Eliminar un veterinario
 	@GetMapping(value = "/vets/{vetId}/delete")
 	public String deleteCliente(@PathVariable("vetId") int vetId) {
 		this.vetService.eliminarVet(vetId);
 		return "redirect:/vets/";
 	}
-
 }
