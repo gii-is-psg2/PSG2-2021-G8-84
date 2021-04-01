@@ -92,7 +92,7 @@ public class VetController {
 	public String processCreationVetForm(@Valid Vet vet, @RequestParam(required = false) List<Specialty> specialties, BindingResult result, ModelMap model) {
 		if(result.hasErrors() || vet.getFirstName().isEmpty() || vet.getLastName().isEmpty()) {
 			model.put("vet", vet);
-			model.addAttribute("message", "There are errors in creation vet form");
+			model.addAttribute("message", "There are errors in creation vet form"); //mensaje error a cambiar a español
 			Collection<Specialty> specs = this.specialtyService.findSpecialties();
 			model.put("specs",specs);
 			return VIEWS_VET_CREATE_OR_UPDATE_FORM;
@@ -118,7 +118,7 @@ public class VetController {
 			BindingResult result, @PathVariable("vetId") int vetId, ModelMap model) {
 		if(result.hasErrors() || vet.getFirstName().isEmpty() || vet.getLastName().isEmpty()) {
 			model.put("vet", vet);
-			model.addAttribute("message", "There are errors in update vet form");
+			model.addAttribute("message", "There are errors in update vet form"); //mensaje error a cambiar a español
 			Collection<Specialty> specs = this.specialtyService.findSpecialties();
 			model.put("specs",specs);
 			return VIEWS_VET_CREATE_OR_UPDATE_FORM;

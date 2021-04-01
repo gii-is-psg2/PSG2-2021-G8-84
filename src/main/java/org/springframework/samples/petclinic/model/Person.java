@@ -32,7 +32,7 @@ public class Person extends BaseEntity {
 
 	@Column(name = "last_name")
 	protected String lastName;
-
+	
 	public String getFirstName() {
 		return this.firstName;
 	}
