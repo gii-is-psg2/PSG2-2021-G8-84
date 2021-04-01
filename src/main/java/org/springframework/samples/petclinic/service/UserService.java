@@ -50,4 +50,9 @@ public class UserService {
 	public Optional<User> findUser(String username) {
 		return userRepository.findById(username);
 	}
+	
+	@Transactional
+    public void eliminarUser(User user) throws DataAccessException{
+        userRepository.delete(user);
+    }
 }

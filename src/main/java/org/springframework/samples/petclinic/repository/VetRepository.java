@@ -45,4 +45,6 @@ public interface VetRepository extends Repository<Vet, Integer>{
 	
 	void save(Vet vet) throws DataAccessException;
 
+	void deleteById(int id) throws DataAccessException;
+
 }
