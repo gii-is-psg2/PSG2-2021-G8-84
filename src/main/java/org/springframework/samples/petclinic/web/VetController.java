@@ -90,8 +90,9 @@ public class VetController {
 	
 	@PostMapping(value = { "vets/new" })
 	public String processCreationVetForm(@Valid Vet vet, @RequestParam(required = false) List<Specialty> specialties, BindingResult result, ModelMap model) {
-		if(result.hasErrors()) {
+		if(result.hasErrors() || vet.getFirstName().isEmpty() || vet.getLastName().isEmpty()) {
 			model.put("vet", vet);
+			model.addAttribute("message", "There are errors in creation vet form");
 			Collection<Specialty> specs = this.specialtyService.findSpecialties();
 			model.put("specs",specs);
 			return VIEWS_VET_CREATE_OR_UPDATE_FORM;
@@ -115,8 +116,9 @@ public class VetController {
 	@PostMapping(value = { "vets/{vetId}/edit" })
 	public String processUpdateVetForm(@Valid Vet vet, @RequestParam(required = false) List<Specialty> specialties,
 			BindingResult result, @PathVariable("vetId") int vetId, ModelMap model) {
-		if(result.hasErrors()) {
+		if(result.hasErrors() || vet.getFirstName().isEmpty() || vet.getLastName().isEmpty()) {
 			model.put("vet", vet);
+			model.addAttribute("message", "There are errors in update vet form");
 			Collection<Specialty> specs = this.specialtyService.findSpecialties();
 			model.put("specs",specs);
 			return VIEWS_VET_CREATE_OR_UPDATE_FORM;
