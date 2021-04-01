@@ -7,7 +7,7 @@
 <%@ attribute name="name" required="true" rtexprvalue="true"
 	description="Name of the active menu: home, owners, vets or error"%>
 
-<nav class="navbar navbar-default" role="navigation" style="background-color:#90ee90">
+<nav class="navbar navbar-default" role="navigation" style="background-color:#624a3d">
 	<div class="container">
 		<div class="navbar-header">
 			<a class="navbar-brand"
@@ -39,12 +39,20 @@
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Veterinarians</span>
 				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'hotel'}" url="/hotel"
+					title="hotel">
+					<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+					<span>Hotel</span>
+				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 					<span>Error</span>
 				</petclinic:menuItem>
+				
+				
 
 			</ul>
 
