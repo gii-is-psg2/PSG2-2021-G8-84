@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Hotel;
 import org.springframework.samples.petclinic.model.Owner;
@@ -35,27 +37,14 @@ public class PetHotelController {
 	private PetHotelRepository petHotelRepo;
 	@Autowired 
 	private OwnerRepository ownerRepo;
-	
+ 	
     @Autowired
 	public PetHotelController(PetService petService, OwnerService ownerService, PetHotelService hotelService) {
 		this.petService = petService;
         this.ownerService = ownerService;
         this.hotelService = hotelService;
 	}
-    
- 
-    
-//    @GetMapping(value = "/{ownerId}")
-//	public String initCreationForm(@PathVariable("ownerId") int ownerId, Hotel hotel, ModelMap model) {
-//		
-//    	Owner owner = findOwner(ownerId);
-//    	List<Pet> pets = owner.getPets();
-//    	model.addAttribute("pets", pets);
-//    	model.addAttribute("owner", owner);
-//    	
-//		return "hotel/hotelBooking";
-//	}
-    
+
     @GetMapping()
 	public String BookingList(ModelMap model) {		
     	List<Hotel> hotel = (List<Hotel>) petHotelRepo.findAll();
@@ -76,18 +65,21 @@ public class PetHotelController {
 	}
 
     @PostMapping("/new")
-	public String saveBooking(Hotel hotel, ModelMap model) {		
-    	Integer ownerId = ownerService.getOwnerId();
-    	Owner owner = ownerService.findOwnerById(ownerId);
-//    	Pet pet = petService.findPetById(petId);
-    	hotel.setOwner(owner);
-    	petHotelRepo.save(hotel);
-    	model.addAttribute("message", "Booking has been created succesfully");
-    	model.addAttribute("owner", owner);
-//    	model.addAttribute("pets", pet);
-    	model.addAttribute("hotel", hotel);
-		return "welcome";
+	public String saveBooking(Hotel hotel, ModelMap model) {	
+    	if(hotelService.validBooking(hotel)){
+    		Integer ownerId = ownerService.getOwnerId();
+        	Owner owner = ownerService.findOwnerById(ownerId);
+        	hotel.setOwner(owner);
+        	petHotelRepo.save(hotel);
+        	model.addAttribute("message", "Booking has been created succesfully");
+        	model.addAttribute("owner", owner);
+        		
+    		return "welcome";	
+    	}else {
+    		model.addAttribute("message", "This pet is already in the hotel or dates are wrong");
+    		return newBooking(model);	
+    	}    	
 	}
-    
+   
 
 }

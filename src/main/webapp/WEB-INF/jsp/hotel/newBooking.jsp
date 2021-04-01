@@ -3,52 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
 
 <petclinic:layout pageName="Bookings">
-	<jsp:attribute name="customScript">
+	    <jsp:attribute name="customScript">
         <script>
-									
-								 	
-         $(function() {
-        	  $("#startDate").datepicker({
-        		  dateFormat : 'yy/mm/dd',
-				    beforeShowDay: function(date) {
-				    
-				  fecha = new Date(date)
-				    	fecha.setMonth(date.getMonth()+1);
-				      if ( ${restriccion}     ) {
-				        return [false, "CSSclass", "disabled"];
-				      } else {
-				        return [true, '', ''];
-				      }
-				    }
-				  });
-        	   $("#startDate").attr("readonly","readonly");
-				  $("#endDate").attr("readonly","readonly"); 
-										
-											  $("#endDate").datepicker({
-												  dateFormat : 'yy/mm/dd',
-											    beforeShowDay: function(date) {
-											    	fecha = new Date(date)
-											    	fecha.setMonth(date.getMonth()+1);
-											    
-											      if (${restriccion} ) {
-											        return [false, "CSSclass", "disabled"];
-											      } else {
-											        return [true, '', ''];
-											      }
-											    }
-											  });
-											});
-										
-									
-									
-									
-									
-								</script>	
+            $(function () {
+                $("#startDate").datepicker({dateFormat: 'yy/mm/dd'});
+            });
+        </script>
+        <script>
+            $(function () {
+                $("#endDate").datepicker({dateFormat: 'yy/mm/dd'});
+            });
+        </script>
     </jsp:attribute>
 	<jsp:body>
 	
