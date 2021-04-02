@@ -25,7 +25,7 @@
                     <c:forEach var="specialty" items="${vet.specialties}">
                         <c:out value="${specialty.name} "/>
                     </c:forEach>
-                    <c:if test="${vet.nrOfSpecialties == 0}">none</c:if>
+                    <c:if test="${vet.nrOfSpecialties == 0}">ninguna</c:if>
                 </td>
                 <td>
                 	<spring:url value="/vets/{vetId}/edit" var="vetUrl"> <spring:param name="vetId" value="${vet.id}" />
