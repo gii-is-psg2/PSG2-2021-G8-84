@@ -94,7 +94,7 @@ public class VetController {
 	public String processCreationVetForm(@Valid Vet vet, @RequestParam(required = false) List<Specialty> specialties, BindingResult result, ModelMap model) {
 		if(result.hasErrors() || vet.getFirstName().isEmpty() || vet.getLastName().isEmpty()) {
 			model.put("vet", vet);
-			model.addAttribute("message", "There are errors in creation vet form"); //mensaje error a traducir a español
+			model.addAttribute("message", "Hay errores en el formulario de creación de veterinarios"); //mensaje error a traducir a español <- gracias por esta nota!
 			Collection<Specialty> specs = this.specialtyService.findSpecialties();
 			model.put("specs",specs);
 			return VIEWS_VET_CREATE_OR_UPDATE_FORM;

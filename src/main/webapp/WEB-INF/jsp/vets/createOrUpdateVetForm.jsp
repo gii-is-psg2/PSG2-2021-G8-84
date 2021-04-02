@@ -7,24 +7,24 @@
 <petclinic:layout pageName="vets">
     <jsp:body>
         <h2>
-            <c:if test="${vet['new']}">New </c:if> Vet
+            <c:if test="${vet['new']}">Nuevo </c:if> Veterinario
         </h2>
         <form:form modelAttribute="vet" class="form-horizontal">
             <input type="hidden" name="id" value="${vet.id}"/>
             <div class="form-group has-feedback">
-                <petclinic:inputField label="First Name" name="firstName"/>
-                <petclinic:inputField label="Last Name" name="lastName"/>
-                <petclinic:selectFieldN label="Specialties" name="specialties" names="${specs}"></petclinic:selectFieldN>
-                <div style=text-align:right>Specialties: 1=radiology, 2=surgery, 3=dentistry</div>
+                <petclinic:inputField label="Nombre" name="firstName"/>
+                <petclinic:inputField label="Apellido" name="lastName"/>
+                <petclinic:selectFieldN label="Especialidades" name="specialties" names="${specs}"></petclinic:selectFieldN>
+                <div style=text-align:right>Especialidades: 1=radiología, 2=cirugía, 3=dentista</div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <c:choose>
                         <c:when test="${vet['new']}">
-                            <button class="btn btn-default" type="submit">Add vet</button>
+                            <button class="btn btn-default" type="submit">Añadir veterinario</button>
                         </c:when>
                         <c:otherwise>
-                            <button class="btn btn-default" type="submit">Edit vet</button>
+                            <button class="btn btn-default" type="submit">Editar veterinario</button>
                         </c:otherwise>
                     </c:choose>
                 </div>
