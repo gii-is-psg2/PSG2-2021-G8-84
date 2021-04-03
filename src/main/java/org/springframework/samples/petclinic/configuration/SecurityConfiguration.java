@@ -42,11 +42,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/hotel/**").hasAnyAuthority("owner","admin")
 				.antMatchers("/owners/**").hasAnyAuthority("owner","admin")
 				.antMatchers("/vets/**").authenticated()
-				.antMatchers("/login*").permitAll()
 				.and()
 				 	.formLogin()
-				 	.loginPage("/login").permitAll()
-				 	/*.failureUrl("/login-error")*/
+				 	/*.loginPage("/login")*/
+				 	.failureUrl("/login-error")
 				.and()
 					.logout()
 						.logoutSuccessUrl("/"); 
