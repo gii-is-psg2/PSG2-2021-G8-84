@@ -29,12 +29,12 @@
         <form:form modelAttribute="hotel" class="form-horizontal">
 			 <input type="hidden" name="ownerId" value="${owner.id}" />
             <div class="form-group has-feedback">
-                <petclinic:inputField label="Start Date"
+                <petclinic:inputField label="Fecha de inicio"
 					name="startDate" />
-                <petclinic:inputField label="End Date" name="endDate" />
+                <petclinic:inputField label="Fecha fin" name="endDate" />
                 
                 <spring:bind path="pet">  
-                  <label for="pet">Choose your pet:</label>
+                  <label for="pet">Elige tu mascota:</label>
                         <select name="pet">
    						 <c:forEach items="${pets}" var="pet">  
    						 <option value="${pet.id}">${pet.name} 	
@@ -54,7 +54,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">                   
                   
-                    <button class="btn btn-default" type="submit">Save booking</button>
+                    <button class="btn btn-default" type="submit">Guardar reserva</button>
                 </div>
             </div>
         </form:form>

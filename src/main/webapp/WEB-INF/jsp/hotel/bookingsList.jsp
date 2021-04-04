@@ -6,15 +6,15 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="owners">
-    <h2>Hotel Bookings</h2>
+    <h2>Reservas del hotel</h2>
 
     <table id="ownersTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Name</th>
-            <th style="width: 150px;">Pet Name</th>
-            <th style="width: 150px;">Start Date</th>
-            <th style="width: 150px;">End Date</th>
+            <th style="width: 150px;">Nombre</th>
+            <th style="width: 150px;">Nombre de la mascota</th>
+            <th style="width: 150px;">Fecha de inicio</th>
+            <th style="width: 150px;">Fecha fin</th>
         </tr>
         </thead>
         <tbody>
@@ -40,6 +40,6 @@
     			
 			<spring:url value="/hotel/new" var="newBooking">
 			</spring:url>
-			<a class="btn btn-default" href="${fn:escapeXml(newBooking)}">New</a>
+			<a class="btn btn-default" href="${fn:escapeXml(newBooking)}">Nueva</a>
 </petclinic:layout>
 

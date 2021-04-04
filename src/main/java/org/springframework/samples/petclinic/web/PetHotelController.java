@@ -71,12 +71,12 @@ public class PetHotelController {
         	Owner owner = ownerService.findOwnerById(ownerId);
         	hotel.setOwner(owner);
         	petHotelRepo.save(hotel);
-        	model.addAttribute("message", "Booking has been created succesfully");
+        	model.addAttribute("message", "Reserva creada con éxito");
         	model.addAttribute("owner", owner);
         		
     		return "welcome";	
     	}else {
-    		model.addAttribute("message", "This pet is already in the hotel or dates are wrong");
+    		model.addAttribute("message", "La mascota ya está en el hotel, o las fechas son incorrectas");
     		return newBooking(model);	
     	}    	
 	}
