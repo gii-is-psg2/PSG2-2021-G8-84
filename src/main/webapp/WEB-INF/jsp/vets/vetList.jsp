@@ -2,16 +2,17 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="vets">
-    <h2>Veterinarians</h2>
-
+	<h2>Veterinarios</h2>
     <table id="vetsTable" class="table table-striped">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Specialties</th>
+            <th>Nombre</th>
+            <th>Especialidades</th>
+            <th>Opciones</th>
         </tr>
         </thead>
         <tbody>
@@ -24,18 +25,24 @@
                     <c:forEach var="specialty" items="${vet.specialties}">
                         <c:out value="${specialty.name} "/>
                     </c:forEach>
-                    <c:if test="${vet.nrOfSpecialties == 0}">none</c:if>
+                    <c:if test="${vet.nrOfSpecialties == 0}">ninguna</c:if>
                 </td>
+                <td>
+                	<spring:url value="/vets/{vetId}/edit" var="vetUrl"> <spring:param name="vetId" value="${vet.id}" />
+					          </spring:url> <a href="${fn:escapeXml(vetUrl)}" class="btn btn-default">Editar veterinario</a>
+                  <spring:url value="/vets/{vetId}/delete" var="vetUrl2"> <spring:param name="vetId" value="${vet.id}" />
+					          </spring:url> <a href="${fn:escapeXml(vetUrl2)}" class="btn btn-default">Eliminar veterinario</a>
+				        </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 
     <table class="table-buttons">
-        <tr>
+        <tr>   
             <td>
-                <a href="<spring:url value="/vets.xml" htmlEscape="true" />">View as XML</a>
-            </td>            
+                <a href="<spring:url value="/vets/new" htmlEscape="true" />" class="btn btn-default">Añadir nuevo veterinario</a>
+            </td>        
         </tr>
     </table>
 </petclinic:layout>

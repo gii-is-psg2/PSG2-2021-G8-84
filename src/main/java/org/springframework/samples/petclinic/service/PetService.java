@@ -79,4 +79,16 @@ public class PetService {
 		return visitRepository.findByPetId(petId);
 	}
 
+	
+    public void eliminarPet(int id) throws DataAccessException{
+        petRepository.deleteById(id);
+    }
+    
+    public void eliminarVisit(int id) throws DataAccessException{
+        visitRepository.deleteById(id);
+    }
+    
+    public Visit findVisitById(int id) throws DataAccessException{
+    	return visitRepository.findById(id);
+    }
 }
