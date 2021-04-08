@@ -1,4 +1,4 @@
-# Niko Niko Calendar of team X
+# Niko Niko Calendar of team G8-84
 ## Introduction
 Some interesting links about what a Niko Niko calendar is and opinions about its use in software development:
 
@@ -17,25 +17,22 @@ Prior to the scrum retrospective meeting, the scrum master will compute a total 
 
 In the retrospective meeting, the team has a discussion about those results.
 
-## Example:
+## Definitions 
 
-### Sprint 3: L3-Measurement 
-
-| Day           | J. A. Parejo  |
+| Icon           | Meaning  |
 | ------------- | ------------- |
-| Day 1         |    :smiley: (Meaning that I am learning, I like the work and I think I can do it without problems, but with some effort) |
-| Day 2         |    - (Meaning that I did no work regarding the PSG2 project)           |
-| Day 3         |    :neutral_face:  (Meaning that I feel I had to struggle, but the assigned work was fair and the day productive)          |:fearful:
-| Day 4         |    :worried: (Meaning that I feel I have serious difficulties to accomplish the task, or the productivity of my day was awful)           |
-| Day 5         |    :fearful:   (I´m desperate, I need help)        |
+| :smiley:        |     Meaning that I am learning, I like the work and I think I can do it without problems, but with some effort |
+| -        |     Meaning that I did no work regarding the PSG2 project           |
+| :neutral_face:        |      Meaning that I feel I had to struggle, but the assigned work was fair and the day productive          |
+| :worried:       |     Meaning that I feel I have serious difficulties to accomplish the task, or the productivity of my day was awful           |
+| :fearful:         |      I´m desperate, I need help        |
 
 
 ## Sprint Template
 
-| Day           | JAPAREJO    | Juanito  | [Member C]     | [Member D]     | [Member E]     | [Member F]     |
-| ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | -------------  |
-| Day 1         | :smile:        |                |                |                |                |                |
-| Day 2         |               |    :smile:            |                |                |                |                |
-| Day 3         |               |    :worried:            |                |                |                |                |
-| Day 4         |  :neutral_face:             |               |                |                |                |                |
-...
+| Day           | Abraham    | Hernán  | Marchena     | Santervas    | Viñuelas     | 
+| ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | 
+| Day 1         |         |                |                |                |                | 
+| Day 2         |               |               |                |                |                |   
+| Day 3         |               |               |                |                |                | 
+| Day 4         |              |               |                |                |                | 
