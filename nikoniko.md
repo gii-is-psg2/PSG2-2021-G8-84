@@ -32,7 +32,7 @@ In the retrospective meeting, the team has a discussion about those results.
 
 | Day           | Abraham    | Hernán  | Marchena     | Santervas    | Viñuelas     | 
 | ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | 
-| 09/04/2021    |         |    :smiley:   |                |                |                | 
+| 09/04/2021    |    :smiley:     |    :smiley:   |                |                |                | 
 | Day 2         |               |               |                |                |                |   
 | Day 3         |               |               |                |                |                | 
 | Day 4         |              |               |                |                |                | 
