@@ -1,33 +1,39 @@
 package org.springframework.samples.petclinic.model;
 
-import javax.persistence.Column;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name="causes")
+@Table(name = "causes")
 public class Cause extends BaseEntity {
 
-	//Attributes
-	
+	// Attributes
+
 	@NotEmpty
 	private String name;
 
 	@NotEmpty
 	private String description;
-	
+
 	@Min(value = 0)
 	private double budgetTarget;
-	
+
 	@NotEmpty
 	private String ngo;
-	
+
 	@Min(value = 0)
 	private double budgetGathered;
-	
-	//getters and setters 
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "donation")
+	private Set<Donation> donations;
+
+	// getters and setters
 
 	public String getName() {
 		return name;
