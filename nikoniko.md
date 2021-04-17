@@ -32,7 +32,7 @@ In the retrospective meeting, the team has a discussion about those results.
 
 | Day           | Abraham    | Hernán  | Marchena     | Santervas    | Viñuelas     | 
 | ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | 
-| Day 1   |    :smiley:     |    :smiley:   |                |    :smiley:     |                | 
-|Day 2    |               |               |               |     :smiley:            |                |   
+| Day 1   |    :smiley:     |    :smiley:   |                |    :smiley:     |       :smiley:       | 
+|Day 2    |               |               |               |     :smiley:            |  :smiley:        |   
 | Day 3         |               |               |                |   :worried:      |                | 
 | Day 4         |              |               |                |                |                | 
