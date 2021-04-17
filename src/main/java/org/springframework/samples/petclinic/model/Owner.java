@@ -68,6 +68,9 @@ public class Owner extends Person {
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User user;
 	//
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+	private Set<Donation> donations;
 
 	public String getAddress() {
 		return this.address;
