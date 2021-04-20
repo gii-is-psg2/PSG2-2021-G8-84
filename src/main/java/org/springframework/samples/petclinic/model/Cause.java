@@ -22,15 +22,15 @@ public class Cause extends BaseEntity {
 	private String description;
 
 	@Min(value = 0)
-	private double budgetTarget;
+	private double target;
 
 	@NotEmpty
 	private String ngo;
 
 	@Min(value = 0)
-	private double budgetGathered;
+	private double gathered;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "donation")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cause")
 	private Set<Donation> donations;
 
 	// getters and setters
@@ -51,12 +51,12 @@ public class Cause extends BaseEntity {
 		this.description = description;
 	}
 
-	public double getBudgetTarget() {
-		return budgetTarget;
+	public double getTarget() {
+		return target;
 	}
 
-	public void setBudgetTarget(double budgetTarget) {
-		this.budgetTarget = budgetTarget;
+	public void setTarget(double target) {
+		this.target = target;
 	}
 
 	public String getNgo() {
@@ -67,17 +67,17 @@ public class Cause extends BaseEntity {
 		this.ngo = ngo;
 	}
 
-	public double getBudgetGathered() {
-		return budgetGathered;
+	public double getGathered() {
+		return gathered;
 	}
 
-	public void setBudgetGathered(double budgetGathered) {
-		this.budgetGathered = budgetGathered;
+	public void setGathered(double gathered) {
+		this.gathered = gathered;
 	}
 
 	@Override
 	public String toString() {
-		return "Cause [name=" + name + ", description=" + description + ", budgetTarget=" + budgetTarget + ", ngo="
-				+ ngo + ", budgetGathered=" + budgetGathered + "]";
+		return "Cause [name=" + name + ", description=" + description + ", target=" + target + ", ngo="
+				+ ngo + ", gathered=" + gathered + "]";
 	}
 }

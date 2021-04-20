@@ -62,3 +62,7 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02',
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
+INSERT INTO causes(id,name,description,target,ngo,gathered) VALUES (1,'Construcción de refugios','Refugios para animales abandonados en verano', 3000.0, 'PerrONG', 700.0);
+INSERT INTO causes(id,name,description,target,ngo,gathered) VALUES (2,'Construcción de comederos','Comederos para animales abandonados en verano', 200.0, 'PerrONG', 200.0);
+INSERT INTO causes(id,name,description,target,ngo,gathered) VALUES (3,'Centro de rehabilitación','Centro médico para la rehabilitación de animales con lesiones graves', 4000.0, 'ONGato', 0.0);
+INSERT INTO causes(id,name,description,target,ngo,gathered) VALUES (4,'Construcción de parques','Parques para animales en los refugios de la zona de Sevilla', 1000.0, 'ONGato', 200.0);
