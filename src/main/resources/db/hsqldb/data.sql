@@ -66,3 +66,15 @@ INSERT INTO causes(id,name,description,target,ngo,gathered) VALUES (1,'Construcc
 INSERT INTO causes(id,name,description,target,ngo,gathered) VALUES (2,'Construcción de comederos','Comederos para animales abandonados en verano', 200.0, 'PerrONG', 200.0);
 INSERT INTO causes(id,name,description,target,ngo,gathered) VALUES (3,'Centro de rehabilitación','Centro médico para la rehabilitación de animales con lesiones graves', 4000.0, 'ONGato', 0.0);
 INSERT INTO causes(id,name,description,target,ngo,gathered) VALUES (4,'Construcción de parques','Parques para animales en los refugios de la zona de Sevilla', 1000.0, 'ONGato', 200.0);
+
+INSERT INTO donations(id,amount,date,cause_id,owner_id) VALUES (1,200,'2021-03-27',1,1);
+INSERT INTO donations(id,amount,date,cause_id,owner_id) VALUES (2,200,'2021-03-29',1,2);
+INSERT INTO donations(id,amount,date,cause_id,owner_id) VALUES (3,200,'2021-04-05',1,3);
+INSERT INTO donations(id,amount,date,cause_id,owner_id) VALUES (4,100,'2021-04-19',1,4);
+
+INSERT INTO donations(id,amount,date,cause_id,owner_id) VALUES (5,200,'2021-02-27',2,5);
+
+INSERT INTO donations(id,amount,date,cause_id,owner_id) VALUES (6,50,'2021-02-28',4,6);
+INSERT INTO donations(id,amount,date,cause_id,owner_id) VALUES (7,50,'2021-03-05',4,7);
+INSERT INTO donations(id,amount,date,cause_id,owner_id) VALUES (8,100,'2021-03-19',4,8);
+

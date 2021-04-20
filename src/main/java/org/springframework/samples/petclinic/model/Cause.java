@@ -74,6 +74,14 @@ public class Cause extends BaseEntity {
 	public void setGathered(double gathered) {
 		this.gathered = gathered;
 	}
+	
+	public Set<Donation> getDonations() {
+		return donations;
+	}
+
+	public void setDonations(Set<Donation> donations) {
+		this.donations = donations;
+	}
 
 	@Override
 	public String toString() {
