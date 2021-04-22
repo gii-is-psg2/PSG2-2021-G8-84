@@ -7,11 +7,14 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Adoption;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.service.AdoptionService;
 import org.springframework.samples.petclinic.service.OwnerService;
+import org.springframework.samples.petclinic.service.PetService;
+import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -32,9 +35,13 @@ public class AdoptionController {
 	private OwnerService ownerService;
 	
 	@Autowired
-	public AdoptionController(AdoptionService adoptionService, OwnerService ownerService) {
+	private PetService petService;
+	
+	@Autowired
+	public AdoptionController(AdoptionService adoptionService, OwnerService ownerService, PetService petService) {
 		this.adoptionService = adoptionService;
 		this.ownerService = ownerService;
+		this.petService = petService;
 	}
 	
 	@InitBinder
@@ -55,13 +62,24 @@ public class AdoptionController {
 	}
 	
 	@PostMapping(value = "/adoptions/new")
-	public String processCreationForm(@Valid Adoption adoption, BindingResult result, ModelMap model) {
+	public String processCreationForm(@Valid Adoption adoption, BindingResult result, ModelMap model) throws DataAccessException, DuplicatedPetNameException {
+		Integer ownerId = this.ownerService.getOwnerId();
+		Owner owner = this.ownerService.findOwnerById(ownerId);
+		List<Pet> pets = owner.getPets();
+		
+		Integer petId = adoption.getPet().getId();
+		Pet pet = this.petService.findPetById(petId);
 		if (result.hasErrors()) {
+			model.addAttribute("pets",pets);
+			return VIEWS_ADOPTION_CREATE_OR_UPDATE_FORM;
+		} if(pet.getAdoption() != null){
+			model.addAttribute("pets",pets);
+			model.addAttribute("message", "Esta mascota ya ha sido puesta en adopción, elija otra");
 			return VIEWS_ADOPTION_CREATE_OR_UPDATE_FORM;
 		} else {
-			Integer ownerId = this.ownerService.getOwnerId();
-			Owner owner = this.ownerService.findOwnerById(ownerId);
 			adoption.setOwner(owner);
+			Pet petSave = adoption.getPet();
+			petSave.setAdoption(adoption);
 			this.adoptionService.saveAdoption(adoption);
 			model.addAttribute("message","Mascota puesta en adopción correctamente");
 			

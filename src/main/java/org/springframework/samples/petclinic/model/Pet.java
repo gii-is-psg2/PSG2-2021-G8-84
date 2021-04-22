@@ -114,5 +114,13 @@ public class Pet extends NamedEntity {
 	public boolean deleteVisit(Visit visit) {
 		return getVisitsInternal().remove(visit);
 	}
+	
+	public Adoption getAdoption() {
+		return this.adoption;
+	}
+	
+	public void setAdoption(Adoption adoption) {
+		this.adoption = adoption;
+	}
 
 }
