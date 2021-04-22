@@ -30,9 +30,9 @@ In the retrospective meeting, the team has a discussion about those results.
 
 ## Sprint Template
 
-| Day           | Abraham    | Hernán  | Marchena     | Santervas    | Viñuelas     | 
+| Day           | Abraham    | Hernán  | Marchena     | Santervás    | Viñuelas     | 
 | ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | 
 | Day 1   |    :smiley:     |    :smiley:   |    :smiley:            |    :smiley:     |       :smiley:       | 
 |Day 2    |               |     :smiley:    |     :smiley:          |     :smiley:            |  :smiley:        |   
 | Day 3         |               |  :neutral_face:     |       :smiley:           |   :worried:      |      :smiley:      | 
-| Day 4         |              |               |                |                |      :smiley:     | 
+| Day 4         |              |               |                |    :smiley:    |      :smiley:     | 
