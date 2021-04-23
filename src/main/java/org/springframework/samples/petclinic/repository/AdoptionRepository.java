@@ -15,6 +15,8 @@ public interface AdoptionRepository extends Repository<Adoption, Integer>{
 	
 	void save(Adoption adoption) throws DataAccessException;
 	
+	void deleteById(int id) throws DataAccessException;
+	
 	Adoption findAdoptionById(int id) throws DataAccessException;
 	
 	@Query("SELECT adoption FROM Adoption adoption WHERE adoption.owner = :owner")

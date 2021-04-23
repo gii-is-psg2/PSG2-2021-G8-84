@@ -15,6 +15,7 @@
             <th style="width: 150px;">Nombre de la mascota</th>
             <th style="width: 150px;">Tipo de mascota</th>
             <th style="width: 150px;">Dueño original</th>
+            <c:if test="${mine == true}"><th style="width: 150px;">Opciones</th></c:if>
         </tr>
         </thead>
         <tbody>
@@ -24,6 +25,14 @@
 					<td><c:out value="${adoption.pet.name}" /></td>
 					<td><c:out value="${adoption.pet.type}" /></td>
 					<td><c:out value="${adoption.owner.firstName} ${adoption.owner.lastName}" /></td>
+					<c:if test="${mine == true}">
+						<td>
+							<spring:url value="/adoptions/{adoptionId}/edit" var="editUrl"> <spring:param name="adoptionId" value="${adoption.id}" /> </spring:url> 
+								<a href="${fn:escapeXml(editUrl)}" class="btn btn-default">Editar</a>
+                  			<spring:url value="/adoptions/{adoptionId}/delete" var="deleteUrl"> <spring:param name="adoptionId" value="${adoption.id}" /> </spring:url>
+                  				<a href="${fn:escapeXml(deleteUrl)}" class="btn btn-default">Eliminar</a>
+						</td>
+					</c:if>
 				</tr>
 			</c:forEach>
 		</tbody>
