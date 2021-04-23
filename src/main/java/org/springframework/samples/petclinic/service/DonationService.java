@@ -50,9 +50,40 @@ private CauseRepository causeRepository;
 
 	@Transactional(readOnly = true)
 	public Double totalDonationByCause(int causeId){
-		return findDonationsByCauseId(causeId).stream().mapToDouble(x->x.getAmount()).sum();
+		return findDonationsByCauseId(causeId).stream().mapToDouble(x->Double.valueOf(x.getAmount())).sum();
 		
 	}
+
+	public boolean validDonation(Donation donation, Cause cause) {
+		String amount = donation.getAmount();
+		Boolean empty = !amount.isEmpty();
+		Boolean isNumber = amount.matches("[0-9]*");
+		Boolean isZero = amount.matches("0");
+		Boolean max = Double.valueOf(donation.getAmount()) <= (cause.getTarget() - cause.getGathered());
+		
+		return empty && isNumber && !isZero && max;
+	}
+	
+	public boolean validNegativeDonation(Donation donation) {
+		String amount = donation.getAmount();
+		Boolean isNegative = amount.contains("-");
+
+		
+		return isNegative;
+	}
+	
+	public boolean validIsZero(Donation donation) {
+		String amount = donation.getAmount();
+		Boolean isZero = Double.valueOf(amount)==0;
+		return isZero;
+	}
+
+	public boolean validMaxDonation(Donation donation, Cause cause) {
+		
+		return Double.valueOf(donation.getAmount()) > (cause.getTarget() - cause.getGathered());
+	}
+	
+
 
 }
 
