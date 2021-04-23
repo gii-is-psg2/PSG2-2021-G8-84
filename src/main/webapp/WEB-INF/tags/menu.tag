@@ -7,7 +7,8 @@
 <%@ attribute name="name" required="true" rtexprvalue="true"
 	description="Name of the active menu: home, owners, vets or error"%>
 
-<nav class="navbar navbar-default" role="navigation" style="background-color:#624a3d">
+<nav class="navbar navbar-default" role="navigation"
+	style="background-color: #624a3d">
 	<div class="container">
 		<div class="navbar-header">
 			<a class="navbar-brand"
@@ -39,11 +40,17 @@
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Veterinarios</span>
 				</petclinic:menuItem>
-				
+
 				<petclinic:menuItem active="${name eq 'hotel'}" url="/hotel"
 					title="hotel">
 					<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					<span>Hotel</span>
+				</petclinic:menuItem>
+
+				<petclinic:menuItem active="${name eq 'causes'}" url="/causes"
+					title="causes">
+					<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+					<span>Causas</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
@@ -51,8 +58,8 @@
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 					<span>Error</span>
 				</petclinic:menuItem>
-				
-				
+
+
 
 			</ul>
 
@@ -87,12 +94,18 @@
 												<a href="<c:url value="/logout" />"
 													class="btn btn-primary btn-block btn-sm">Cerrar sesión</a>
 											</p>
+											<sec:authorize access="hasAuthority('owner')">
+											<p class="text-left">
+												<a href="<c:url value="/myCauses" />"
+													class="btn btn-primary btn-block btn-sm">Mis causas</a>
+											</p>
+											</sec:authorize>
 										</div>
 									</div>
 								</div>
 							</li>
 							<li class="divider"></li>
-<!-- 							
+							<!-- 							
                             <li> 
 								<div class="navbar-login navbar-login-session">
 									<div class="row">
