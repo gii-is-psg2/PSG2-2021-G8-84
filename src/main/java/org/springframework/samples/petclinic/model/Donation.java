@@ -6,44 +6,46 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="donations")
-public class Donation extends BaseEntity{
+@Table(name = "donations")
+public class Donation extends BaseEntity {
+
+	// Attributes
+
+
 	
-	//Attributes
-	
-	@Min(value = 0)
-	private double amount;
-	
+	private String amount;
+
 	@NotNull
-	private LocalDate date;
-	
+	private String date;
+
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
 	private Owner owner;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "cause_id")
 	private Cause cause;
 
-	//Getters and Setters
-	
-	public double getAmount() {
+	// Getters and Setters
+
+	public String getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -66,6 +68,6 @@ public class Donation extends BaseEntity{
 	@Override
 	public String toString() {
 		return "Donation [amount=" + amount + ", date=" + date + ", owner=" + owner + ", cause=" + cause + "]";
-	}	
+	}
 
 }
