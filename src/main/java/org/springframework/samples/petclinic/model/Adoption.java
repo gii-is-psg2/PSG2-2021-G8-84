@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -14,12 +15,12 @@ public class Adoption extends BaseEntity{
 	@NotEmpty
 	private String description;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "owner", referencedColumnName = "owner_id")
+	@ManyToOne
+	@JoinColumn(name = "owner_id")
 	private Owner owner;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "pet", referencedColumnName = "pet_id")
+	@OneToOne(cascade = CascadeType.ALL, optional = true)
+	@JoinColumn(name = "pet_id", referencedColumnName = "id")
 	private Pet pet;
 	
 	// Getters y setters

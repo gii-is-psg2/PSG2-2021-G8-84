@@ -62,3 +62,23 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02',
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
+INSERT INTO adoptions(id,description,owner_id,pet_id) VALUES (1, 'Hamster de 10 años', 2, 2);
+INSERT INTO adoptions(id,description,owner_id,pet_id) VALUES (2, 'Leo el gatito', 1, 1);
+INSERT INTO adoptions(id,description,owner_id,pet_id) VALUES (3, 'Sly el gatete', 10, 13);
+INSERT INTO adoptions(id,description,owner_id,pet_id) VALUES (4, 'Freddy el pajarito', 9, 11);
+
+UPDATE pets
+SET adoption_id = 1
+WHERE id = 2;
+
+UPDATE pets
+SET adoption_id = 2
+WHERE id = 1;
+
+UPDATE pets
+SET adoption_id = 3
+WHERE id = 13;
+
+UPDATE pets
+SET adoption_id = 4
+WHERE id = 11;
