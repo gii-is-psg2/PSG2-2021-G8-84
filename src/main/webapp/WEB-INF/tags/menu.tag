@@ -94,6 +94,12 @@
 												<a href="<c:url value="/logout" />"
 													class="btn btn-primary btn-block btn-sm">Cerrar sesión</a>
 											</p>
+											<sec:authorize access="hasAuthority('owner')">
+											<p class="text-left">
+												<a href="<c:url value="/myCauses" />"
+													class="btn btn-primary btn-block btn-sm">Mis causas</a>
+											</p>
+											</sec:authorize>
 										</div>
 									</div>
 								</div>
