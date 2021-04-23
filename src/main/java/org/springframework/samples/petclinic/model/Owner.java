@@ -62,6 +62,9 @@ public class Owner extends Person {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
 	private Set<Pet> pets;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+	private Set<Cause> causes;
 
 	//
 	@OneToOne(cascade = CascadeType.ALL)
@@ -120,6 +123,8 @@ public class Owner extends Person {
 		PropertyComparator.sort(sortedPets, new MutableSortDefinition("name", true, true));
 		return Collections.unmodifiableList(sortedPets);
 	}
+	
+	
 
 	public void addPet(Pet pet) {
 		getPetsInternal().add(pet);

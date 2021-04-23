@@ -4,10 +4,14 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "causes")
@@ -21,8 +25,8 @@ public class Cause extends BaseEntity {
 	@NotEmpty
 	private String description;
 
-	@Min(value = 0)
-	private double target;
+
+	private String target;
 
 	@NotEmpty
 	private String ngo;
@@ -32,6 +36,11 @@ public class Cause extends BaseEntity {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cause")
 	private Set<Donation> donations;
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "owner_id")
+	private Owner owner;
 
 	// getters and setters
 
@@ -51,11 +60,11 @@ public class Cause extends BaseEntity {
 		this.description = description;
 	}
 
-	public double getTarget() {
+	public String getTarget() {
 		return target;
 	}
 
-	public void setTarget(double target) {
+	public void setTarget(String target) {
 		this.target = target;
 	}
 
@@ -81,6 +90,15 @@ public class Cause extends BaseEntity {
 
 	public void setDonations(Set<Donation> donations) {
 		this.donations = donations;
+		
+	}
+	
+	public Owner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Owner owner) {
+		this.owner = owner;
 	}
 
 	@Override
