@@ -64,7 +64,15 @@ public class Owner extends Person {
 	private Set<Pet> pets;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-	private Set<Cause> causes;
+
+	private Set<Adoption> adoptions;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+	private Set<AdoptionRequest> adoptionRequests;
+
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+  private Set<Cause> causes;
+
 
 	//
 	@OneToOne(cascade = CascadeType.ALL)
@@ -125,6 +133,26 @@ public class Owner extends Person {
 	}
 	
 	
+
+	public void setPets(Set<Pet> pets) {
+		this.pets = pets;
+	}
+
+	public Set<Adoption> getAdoptions() {
+		return adoptions;
+	}
+
+	public void setAdoptions(Set<Adoption> adoptions) {
+		this.adoptions = adoptions;
+	}
+
+	public Set<AdoptionRequest> getAdoptionRequests() {
+		return adoptionRequests;
+	}
+
+	public void setAdoptionRequests(Set<AdoptionRequest> adoptionRequests) {
+		this.adoptionRequests = adoptionRequests;
+	}
 
 	public void addPet(Pet pet) {
 		getPetsInternal().add(pet);
