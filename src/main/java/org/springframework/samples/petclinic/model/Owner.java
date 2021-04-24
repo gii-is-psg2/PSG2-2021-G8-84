@@ -64,16 +64,24 @@ public class Owner extends Person {
 	private Set<Pet> pets;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+
 	private Set<Adoption> adoptions;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
 	private Set<AdoptionRequest> adoptionRequests;
+
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+  private Set<Cause> causes;
+
 
 	//
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User user;
 	//
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+	private Set<Donation> donations;
 
 	public String getAddress() {
 		return this.address;
@@ -123,6 +131,8 @@ public class Owner extends Person {
 		PropertyComparator.sort(sortedPets, new MutableSortDefinition("name", true, true));
 		return Collections.unmodifiableList(sortedPets);
 	}
+	
+	
 
 	public void setPets(Set<Pet> pets) {
 		this.pets = pets;
