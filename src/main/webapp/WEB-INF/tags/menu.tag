@@ -7,7 +7,8 @@
 <%@ attribute name="name" required="true" rtexprvalue="true"
 	description="Name of the active menu: home, owners, vets or error"%>
 
-<nav class="navbar navbar-default" role="navigation" style="background-color:#624a3d">
+<nav class="navbar navbar-default" role="navigation"
+	style="background-color: #624a3d">
 	<div class="container">
 		<div class="navbar-header">
 			<a class="navbar-brand"
@@ -31,7 +32,7 @@
 				<petclinic:menuItem active="${name eq 'owners'}" url="/owners/find"
 					title="find owners">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Encontrar propietarios</span>
+					<span>Buscar propietarios</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'vets'}" url="/vets"
@@ -39,20 +40,32 @@
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Veterinarios</span>
 				</petclinic:menuItem>
-				
+
 				<petclinic:menuItem active="${name eq 'hotel'}" url="/hotel"
 					title="hotel">
 					<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					<span>Hotel</span>
 				</petclinic:menuItem>
 
-				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
+				<petclinic:menuItem active="${name eq 'causes'}" url="/causes"
+					title="causes">
+					<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+					<span>Causas</span>
+				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'adoptions'}" url="/adoptions/list"
+					title="adoptions">
+					<span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+					<span>Adopciones</span>
+				</petclinic:menuItem>
+
+				<%-- <petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 					<span>Error</span>
-				</petclinic:menuItem>
-				
-				
+				</petclinic:menuItem> --%>
+
+
 
 			</ul>
 
@@ -79,20 +92,38 @@
 												<span class="glyphicon glyphicon-user icon-size"></span>
 											</p>
 										</div>
-										<div class="col-lg-8">
-											<p class="text-left">
+										<div class="col-lg-15">
+											<p class="text-center">
 												<strong><sec:authentication property="name" /></strong>
 											</p>
-											<p class="text-left">
+											<p class="text-center">
 												<a href="<c:url value="/logout" />"
 													class="btn btn-primary btn-block btn-sm">Cerrar sesión</a>
 											</p>
+											<sec:authorize access="hasAuthority('owner')">
+											<p class="text-left">
+												<a href="<c:url value="/myCauses" />"
+													class="btn btn-primary btn-block btn-sm">Mis causas</a>
+											</p>
+											</sec:authorize>
+											<sec:authorize access="hasAuthority('owner')">
+											<p class="text-center">
+												<a href="<c:url value="/adoptions/list-mine" />"
+													class="btn btn-primary btn-block btn-sm">Mis mascotas en adopción</a>
+											</p>
+											</sec:authorize>
+											<sec:authorize access="hasAuthority('owner')">
+											<p class="text-center">
+												<a href="<c:url value="/adoptions/my-requests" />"
+													class="btn btn-primary btn-block btn-sm">Mis mensajes de adopción</a>
+											</p>
+											</sec:authorize>
 										</div>
 									</div>
 								</div>
 							</li>
 							<li class="divider"></li>
-<!-- 							
+							<!-- 							
                             <li> 
 								<div class="navbar-login navbar-login-session">
 									<div class="row">
