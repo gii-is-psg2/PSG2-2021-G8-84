@@ -32,7 +32,7 @@
 				<petclinic:menuItem active="${name eq 'owners'}" url="/owners/find"
 					title="find owners">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Encontrar propietarios</span>
+					<span>Buscar propietarios</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'vets'}" url="/vets"
@@ -52,12 +52,18 @@
 					<span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
 					<span>Causas</span>
 				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'adoptions'}" url="/adoptions/list"
+					title="adoptions">
+					<span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+					<span>Adopciones</span>
+				</petclinic:menuItem>
 
-				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
+				<%-- <petclinic:menuItem active="${name eq 'error'}" url="/oups"
 					title="trigger a RuntimeException to see how it is handled">
 					<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
 					<span>Error</span>
-				</petclinic:menuItem>
+				</petclinic:menuItem> --%>
 
 
 
@@ -86,11 +92,11 @@
 												<span class="glyphicon glyphicon-user icon-size"></span>
 											</p>
 										</div>
-										<div class="col-lg-8">
-											<p class="text-left">
+										<div class="col-lg-15">
+											<p class="text-center">
 												<strong><sec:authentication property="name" /></strong>
 											</p>
-											<p class="text-left">
+											<p class="text-center">
 												<a href="<c:url value="/logout" />"
 													class="btn btn-primary btn-block btn-sm">Cerrar sesión</a>
 											</p>
@@ -98,6 +104,18 @@
 											<p class="text-left">
 												<a href="<c:url value="/myCauses" />"
 													class="btn btn-primary btn-block btn-sm">Mis causas</a>
+											</p>
+											</sec:authorize>
+											<sec:authorize access="hasAuthority('owner')">
+											<p class="text-center">
+												<a href="<c:url value="/adoptions/list-mine" />"
+													class="btn btn-primary btn-block btn-sm">Mis mascotas en adopción</a>
+											</p>
+											</sec:authorize>
+											<sec:authorize access="hasAuthority('owner')">
+											<p class="text-center">
+												<a href="<c:url value="/adoptions/my-requests" />"
+													class="btn btn-primary btn-block btn-sm">Mis mensajes de adopción</a>
 											</p>
 											</sec:authorize>
 										</div>

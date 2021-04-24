@@ -25,19 +25,20 @@ class ValidatorTests {
 	}
 
 	@Test
-	void shouldNotValidateWhenFirstNameEmpty() {
+	void shouldNotValidateWhenDescriptionEmpty() {
 
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
-		Person person = new Person();
-		person.setFirstName("");
-		person.setLastName("smith");
+		AdoptionRequest ar = new AdoptionRequest();
+		ar.setDescription("");
+		ar.setOwner(null);
+		ar.setAdoption(null);
 
 		Validator validator = createValidator();
-		Set<ConstraintViolation<Person>> constraintViolations = validator.validate(person);
+		Set<ConstraintViolation<AdoptionRequest>> constraintViolations = validator.validate(ar);
 
 		assertThat(constraintViolations.size()).isEqualTo(1);
-		ConstraintViolation<Person> violation = constraintViolations.iterator().next();
-		assertThat(violation.getPropertyPath().toString()).isEqualTo("firstName");
+		ConstraintViolation<AdoptionRequest> violation = constraintViolations.iterator().next();
+		assertThat(violation.getPropertyPath().toString()).isEqualTo("description");
 		assertThat(violation.getMessage()).isEqualTo("must not be empty");
 	}
 
