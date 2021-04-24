@@ -39,4 +39,9 @@ public class AdoptionService {
 	public void saveAdoption(Adoption adoption) throws DataAccessException{
 		this.adoptionRepository.save(adoption);
 	}
+	
+	@Transactional
+	public void deleteAdoptionById(int id) throws DataAccessException{
+		this.adoptionRepository.deleteById(id);
+	}
 }
