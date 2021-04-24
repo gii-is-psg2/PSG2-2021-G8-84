@@ -71,9 +71,12 @@ public class AdoptionRequestController {
 			Integer ownerId = this.oService.getOwnerId();
 			Owner owner = this.oService.findOwnerById(ownerId);
 			adoptionRequest.setOwner(owner);
+			Adoption adoption = this.aService.findAdoptionById(adoptionId);
+			adoptionRequest.setAdoption(adoption);
+			this.arService.saveAdoptionRequest(adoptionRequest);
 			model.addAttribute("message", "Solicitud de adopción creada correctamente");
 			
-			return "redirect:/adoptions/list";
+			return "redirect:/adoptions/my-requests";
 		}
 	}
 	
@@ -101,9 +104,12 @@ public class AdoptionRequestController {
 			Integer ownerId = this.oService.getOwnerId();
 			Owner owner = this.oService.findOwnerById(ownerId);
 			ar.setOwner(owner);
+			Adoption adoption = this.aService.findAdoptionById(adoptionId);
+			ar.setAdoption(adoption);
+			this.arService.saveAdoptionRequest(ar);
 			model.addAttribute("message", "Solicitud de adopción creada correctamente");
 			
-			return "redirect:/adoptions/list";
+			return "redirect:/adoptions/my-requests";
 		}
 	}
 	
@@ -138,7 +144,7 @@ public class AdoptionRequestController {
 		ar.getAdoption().setPet(null);
 		this.aService.deleteAdoptionById(adoptionId);
 		
-		return "redirect:/adoptions/my-requests";
+		return "redirect:/adoptions/list-mine";
 	}
 	
 	@GetMapping(value = "/adoptions/{adoptionId}")

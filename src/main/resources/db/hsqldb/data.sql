@@ -82,3 +82,8 @@ WHERE id = 13;
 UPDATE pets
 SET adoption_id = 4
 WHERE id = 11;
+
+INSERT INTO adoption_requests(id,description,owner_id,adoption_id) VALUES (1,'Tengo 2 gatos más, me encantan',2,2);
+INSERT INTO adoption_requests(id,description,owner_id,adoption_id) VALUES (2,'Siempre he querido un hámster',1,1);
+INSERT INTO adoption_requests(id,description,owner_id,adoption_id) VALUES (3,'Otro gatito para la familia',1,3);
+INSERT INTO adoption_requests(id,description,owner_id,adoption_id) VALUES (4,'Tengo 2 gatos más, me requete-encantan',3,2);
