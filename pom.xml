@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>es.us.psg2</groupId>
     <artifactId>spring-petclinic.psg2.2021-G8-84</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.1</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.4.RELEASE</version>
     </parent>
-    <name>PSG2-2021-G8-84 Petclinic</name>
+    <name>PSG2-2021-G8-84</name>
     
     <developers>
         <developer>

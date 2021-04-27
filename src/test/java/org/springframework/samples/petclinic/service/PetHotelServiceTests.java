@@ -14,7 +14,7 @@ import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-public class PetHotelServiceTests {
+class PetHotelServiceTests {
 
 	@Autowired
 	protected PetHotelService hotelService;
@@ -39,7 +39,7 @@ public class PetHotelServiceTests {
 		hotel.setEndDate(fechaFinal);
 		
 		Boolean res = this.hotelService.validBooking(hotel);
-		assertThat(res).isEqualTo(true);
+		assertThat(res).isTrue();
 	}
 	
 	@Test
@@ -56,6 +56,6 @@ public class PetHotelServiceTests {
 		hotel.setEndDate(fechaFinal);
 		
 		Boolean res = this.hotelService.validBooking(hotel);
-		assertThat(res).isEqualTo(false);
+		assertThat(res).isFalse();
 	}
 }

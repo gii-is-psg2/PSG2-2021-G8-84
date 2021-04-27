@@ -33,7 +33,7 @@ public class PetHotelController {
 	}
 
 	@GetMapping()
-	public String BookingList(ModelMap model) {
+	public String bookingList(ModelMap model) {
 		List<Hotel> hotel = (List<Hotel>) petHotelRepo.findAll();
 		model.addAttribute("hotels", hotel);
 		return "hotel/bookingsList";

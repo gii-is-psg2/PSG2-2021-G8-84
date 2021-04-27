@@ -38,6 +38,8 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class VisitController {
 
+	private static final String VISIT_FORM = "pets/createOrUpdateVisitForm";
+	
 	private final PetService petService;
 
 	@Autowired
@@ -69,17 +71,17 @@ public class VisitController {
 	// Spring MVC calls method loadPetWithVisit(...) before initNewVisitForm is called
 	@GetMapping(value = "/owners/*/pets/{petId}/visits/new")
 	public String initNewVisitForm(@PathVariable("petId") int petId, Map<String, Object> model) {
-		return "pets/createOrUpdateVisitForm";
+		return VISIT_FORM;
 	}
 
 	// Spring MVC calls method loadPetWithVisit(...) before processNewVisitForm is called
 	@PostMapping(value = "/owners/{ownerId}/pets/{petId}/visits/new")
 	public String processNewVisitForm(@Valid Visit visit, BindingResult result, Map<String, Object> model) {
 		if (result.hasErrors()) {
-			return "pets/createOrUpdateVisitForm";
+			return VISIT_FORM;
 		} else if(visit.getDate().isBefore(LocalDate.now())) {
 			model.put("message", "La fecha no puede ser anterior al día de hoy");
-			return "pets/createOrUpdateVisitForm";
+			return VISIT_FORM;
 		}
 		else {
 			this.petService.saveVisit(visit);

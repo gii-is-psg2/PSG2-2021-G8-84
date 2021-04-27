@@ -46,6 +46,7 @@ import javax.validation.Valid;
 public class VetController {
 
 	private static final String VIEWS_VET_CREATE_OR_UPDATE_FORM = "vets/createOrUpdateVetForm";
+	private static final String ESPECIALIDADES = "specs";
 	
 	private final VetService vetService;
 	private final SpecialtyService specialtyService;
@@ -86,7 +87,7 @@ public class VetController {
 		Vet vet = new Vet();
 		model.put("vet", vet);
 		Collection<Specialty> specs = this.specialtyService.findSpecialties();
-		model.put("specs",specs);
+		model.put(ESPECIALIDADES,specs);
 		return VIEWS_VET_CREATE_OR_UPDATE_FORM;
 	}
 	
@@ -96,7 +97,7 @@ public class VetController {
 			model.put("vet", vet);
 			model.addAttribute("message", "Hay errores en el formulario de creación de veterinarios"); //mensaje error a traducir a español <- gracias por esta nota!
 			Collection<Specialty> specs = this.specialtyService.findSpecialties();
-			model.put("specs",specs);
+			model.put(ESPECIALIDADES,specs);
 			return VIEWS_VET_CREATE_OR_UPDATE_FORM;
 		}else {
 			if(specialties != null) for(Specialty spec : specialties) vet.addSpecialty(spec);
@@ -111,7 +112,7 @@ public class VetController {
 		Vet vet = this.vetService.findVetById(vetId);
 		model.put("vet",vet);
 		Collection<Specialty> specs = this.specialtyService.findSpecialties();
-		model.put("specs",specs);
+		model.put(ESPECIALIDADES,specs);
 		return VIEWS_VET_CREATE_OR_UPDATE_FORM;
 	}
 	
@@ -122,9 +123,10 @@ public class VetController {
 			model.put("vet", vet);
 			model.addAttribute("message", "There are errors in update vet form"); //mensaje error a traducir a español
 			Collection<Specialty> specs = this.specialtyService.findSpecialties();
-			model.put("specs",specs);
+			model.put(ESPECIALIDADES,specs);
 			return VIEWS_VET_CREATE_OR_UPDATE_FORM;
 		}else {
+			vet.setId(vetId);
 			if(specialties != null) for(Specialty spec : specialties) vet.addSpecialty(spec);
 			this.vetService.saveVet(vet);
 			return "redirect:/vets";

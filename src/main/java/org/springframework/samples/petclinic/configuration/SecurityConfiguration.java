@@ -27,6 +27,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+	private static final String ADMIN = "admin";
+	private static final String OWNER = "owner";
+	
 	@Autowired
 	DataSource dataSource;
 	
@@ -37,12 +40,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/","/oups").permitAll()
 				.antMatchers("/users/new").permitAll()
 				.antMatchers("/pets/**").permitAll()
-				.antMatchers("/admin/**").hasAnyAuthority("admin")
-				.antMatchers("/causes/**").hasAnyAuthority("owner","admin")
-				.antMatchers("/adoptions/**").hasAnyAuthority("owner","admin")
-				.antMatchers("/hotel/**").hasAnyAuthority("owner","admin")
-				.antMatchers("/owners/**").hasAnyAuthority("owner","admin")
-				.antMatchers("/vets/**").authenticated()
+				.antMatchers("/admin/**").hasAnyAuthority(ADMIN)
+				.antMatchers("/causes/**").hasAnyAuthority(OWNER,ADMIN)
+				.antMatchers("/adoptions/**").hasAnyAuthority(OWNER,ADMIN)
+				.antMatchers("/hotel/**").hasAnyAuthority(OWNER,ADMIN)
+				.antMatchers("/owners/**").hasAnyAuthority(OWNER,ADMIN)
+				.antMatchers("/vets/**").hasAnyAuthority(OWNER,ADMIN)
 				.and()
 				 	.formLogin()
 				 	/*.loginPage("/login")*/

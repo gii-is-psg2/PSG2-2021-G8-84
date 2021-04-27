@@ -14,7 +14,6 @@ import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.service.AdoptionService;
 import org.springframework.samples.petclinic.service.OwnerService;
 import org.springframework.samples.petclinic.service.PetService;
-import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -29,6 +28,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AdoptionController {
 	
 	private static final String VIEWS_ADOPTION_CREATE_OR_UPDATE_FORM = "adoptions/newAdoption";
+	private static final String MESSAGE = "message";
+	private static final String MY_ADOPTIONS = "redirect:/adoptions/list-mine";
 	
 	@Autowired
 	private AdoptionService adoptionService;
@@ -64,7 +65,7 @@ public class AdoptionController {
 	}
 	
 	@PostMapping(value = "/adoptions/new")
-	public String processCreationForm(@Valid Adoption adoption, BindingResult result, ModelMap model) throws DataAccessException, DuplicatedPetNameException {
+	public String processCreationForm(@Valid Adoption adoption, BindingResult result, ModelMap model) throws DataAccessException{
 		Integer ownerId = this.ownerService.getOwnerId();
 		Owner owner = this.ownerService.findOwnerById(ownerId);
 		List<Pet> pets = owner.getPets();
@@ -74,18 +75,18 @@ public class AdoptionController {
 		if (result.hasErrors()) {
 			model.addAttribute("pets",pets);
 			return VIEWS_ADOPTION_CREATE_OR_UPDATE_FORM;
-		} if(pet.getAdoption() != null){
+		} else if(pet.getAdoption() != null){
 			model.addAttribute("pets",pets);
-			model.addAttribute("message", "Esta mascota ya ha sido puesta en adopción, elija otra");
+			model.addAttribute(MESSAGE, "Esta mascota ya ha sido puesta en adopción, elija otra");
 			return VIEWS_ADOPTION_CREATE_OR_UPDATE_FORM;
 		} else {
 			adoption.setOwner(owner);
 			Pet petSave = adoption.getPet();
 			petSave.setAdoption(adoption);
 			this.adoptionService.saveAdoption(adoption);
-			model.addAttribute("message","Mascota puesta en adopción correctamente");
+			model.addAttribute(MESSAGE,"Mascota puesta en adopción correctamente");
 			
-			return "redirect:/adoptions/list-mine";
+			return MY_ADOPTIONS;
 		}
 	}
 	
@@ -115,7 +116,7 @@ public class AdoptionController {
 			return VIEWS_ADOPTION_CREATE_OR_UPDATE_FORM;
 		}else if(pet.getAdoption() != null && !pet.equals(adoption.getPet())) {
 			model.addAttribute("pets",pets);
-			model.addAttribute("message", "Esta mascota ya ha sido puesta en adopción, elija otra");
+			model.addAttribute(MESSAGE, "Esta mascota ya ha sido puesta en adopción, elija otra");
 			return VIEWS_ADOPTION_CREATE_OR_UPDATE_FORM;
 		}else{
 			adoption.setId(adoptionId);
@@ -123,9 +124,9 @@ public class AdoptionController {
 			Pet petSave = adoption.getPet();
 			petSave.setAdoption(adoption);
 			this.adoptionService.saveAdoption(adoption);
-			model.addAttribute("message","Mascota puesta en adopción correctamente");
+			model.addAttribute(MESSAGE,"Mascota puesta en adopción correctamente");
 			
-			return "redirect:/adoptions/list-mine";
+			return MY_ADOPTIONS;
 		}
 	}
 	
@@ -135,7 +136,7 @@ public class AdoptionController {
 		adoption.getPet().setAdoption(null);
 		adoption.setPet(null);
 		this.adoptionService.deleteAdoptionById(adoptionId);
-		return "redirect:/adoptions/list-mine";
+		return MY_ADOPTIONS;
 	}
 	
 	@GetMapping(value = "/adoptions/list")

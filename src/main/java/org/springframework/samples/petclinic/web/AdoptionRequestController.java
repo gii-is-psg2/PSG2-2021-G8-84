@@ -26,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdoptionRequestController {
 
 	private static final String ADOPTION_REQUEST_FORM = "adoptionRequests/newAdoptionRequest";
+	private static final String ADOP = "adoption";
+	private static final String MY_REQUESTS = "redirect:/adoptions/my-requests";
 	
 	@Autowired
 	private AdoptionRequestService arService;
@@ -54,7 +56,7 @@ public class AdoptionRequestController {
 		Owner owner = this.oService.findOwnerById(ownerId);
 		model.addAttribute("owner", owner);
 		Adoption adoption = this.aService.findAdoptionById(adoptionId);
-		model.addAttribute("adoption",adoption);
+		model.addAttribute(ADOP,adoption);
 		AdoptionRequest ar = new AdoptionRequest();
 		model.addAttribute("adoptionRequest", ar);
 		return ADOPTION_REQUEST_FORM;
@@ -76,7 +78,7 @@ public class AdoptionRequestController {
 			this.arService.saveAdoptionRequest(adoptionRequest);
 			model.addAttribute("message", "Solicitud de adopción creada correctamente");
 			
-			return "redirect:/adoptions/my-requests";
+			return MY_REQUESTS;
 		}
 	}
 	
@@ -87,7 +89,7 @@ public class AdoptionRequestController {
 		Owner owner = this.oService.findOwnerById(ownerId);
 		model.addAttribute("owner", owner);
 		Adoption adoption = this.aService.findAdoptionById(adoptionId);
-		model.addAttribute("adoption",adoption);
+		model.addAttribute(ADOP,adoption);
 		AdoptionRequest ar = this.arService.findAdoptionRequestById(arId);
 		model.addAttribute("adoptionRequest", ar);
 		return ADOPTION_REQUEST_FORM;
@@ -109,7 +111,7 @@ public class AdoptionRequestController {
 			this.arService.saveAdoptionRequest(ar);
 			model.addAttribute("message", "Solicitud de adopción creada correctamente");
 			
-			return "redirect:/adoptions/my-requests";
+			return MY_REQUESTS;
 		}
 	}
 	
@@ -118,7 +120,7 @@ public class AdoptionRequestController {
 		AdoptionRequest ar = this.arService.findAdoptionRequestById(arId);
 		this.aService.findAdoptionById(adoptionId).getAdoptionRequests().remove(ar);
 		this.arService.deleteAdoptionRequestById(arId);
-		return "redirect:/adoptions/my-requests";
+		return MY_REQUESTS;
 	}
 	
 	@GetMapping(value = "/adoptions/my-requests")
@@ -150,7 +152,7 @@ public class AdoptionRequestController {
 	@GetMapping(value = "/adoptions/{adoptionId}")
 	public ModelAndView showAdoptionDetails(@PathVariable("adoptionId") int adoptionId) {
 		ModelAndView mav = new ModelAndView("adoptions/adoptionDetails");
-		mav.addObject("adoption", this.aService.findAdoptionById(adoptionId));
+		mav.addObject(ADOP, this.aService.findAdoptionById(adoptionId));
 		return mav;
 	}
 }
