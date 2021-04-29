@@ -41,6 +41,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class OwnerController {
 
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
+	private static final String URL_PROPIETARIO = "redirect:/owners/";
 
 	private final OwnerService ownerService;
 
@@ -69,7 +70,7 @@ public class OwnerController {
 			// creating owner, user and authorities
 			this.ownerService.saveOwner(owner);
 
-			return "redirect:/owners/" + owner.getId();
+			return URL_PROPIETARIO + owner.getId();
 		}
 	}
 
@@ -96,7 +97,7 @@ public class OwnerController {
 		} else if (results.size() == 1) {
 			// 1 owner found
 			owner = results.iterator().next();
-			return "redirect:/owners/" + owner.getId();
+			return URL_PROPIETARIO + owner.getId();
 		} else {
 			// multiple owners found
 			model.put("selections", results);
@@ -141,7 +142,7 @@ public class OwnerController {
 		Owner owner = ownerService.findOwnerById(ownerId);
 		owner.setUser(null);
 		this.ownerService.eliminarOwner(ownerId);
-		return "redirect:/owners/";
+		return URL_PROPIETARIO;
 	}
 
 }

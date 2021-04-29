@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,8 +20,7 @@ public class PetHotelService {
 	}
 
 	public Integer numberOfBookingsForPet(int petId) {
-		List<Hotel> lista = new ArrayList<Hotel>();
-		lista = (List<Hotel>) hotelRepository.findAll();
+		List<Hotel> lista  = (List<Hotel>) hotelRepository.findAll();
 		return lista.stream().filter(x -> x.getPet().getId().equals(petId)).collect(Collectors.toList()).size();
 	}
 

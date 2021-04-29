@@ -85,12 +85,14 @@ public class OwnerService {
 		if (sesion instanceof UserDetails) {
 			us = (UserDetails) sesion;
 		}
-		String res = us.getUsername();		
-
-			Owner o = (ownerRepository.findAllOwners().stream().filter(x -> x.getUser().getUsername().equals(res)))
-					.collect(Collectors.toList()).get(0);
-			Integer ownerId = o.getId();
-		return ownerId;
+		if (us != null) {
+			String res = us.getUsername();		
+				Owner o = (ownerRepository.findAllOwners().stream().filter(x -> x.getUser().getUsername().equals(res)))
+						.collect(Collectors.toList()).get(0);
+			return o.getId();
+		}else {
+			return 0;
+		}
 
 	}
 	

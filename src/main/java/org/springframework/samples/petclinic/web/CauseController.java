@@ -6,15 +6,11 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
-
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cause;
 import org.springframework.samples.petclinic.model.Donation;
-import org.springframework.samples.petclinic.model.Hotel;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.repository.CauseRepository;
 import org.springframework.samples.petclinic.service.CauseService;
@@ -29,7 +25,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class CauseController {
 
-//	private static final String VIEWS_CAUSE_CREATE_OR_UPDATE_FORM = "causes/createOrUpdateCauseForm";
+	private static final String CAUSA = "cause";
+	private static final String PROPIETARIO = "owner";
+	private static final String MENSAJE = "message";
 
 	private final CauseService causeService;
 	private final DonationService donationService;
@@ -68,7 +66,7 @@ public class CauseController {
 				.collect(Collectors.toList());
 		donations.sort(Comparator.comparing(Donation::getDate));
 		model.put("donations", donations);
-		model.put("cause", cause);
+		model.put(CAUSA, cause);
 		return "causes/causeDetailsList";
 	}
 
@@ -82,8 +80,8 @@ public class CauseController {
 		Donation donation = new Donation();
 		LocalDate date = LocalDate.now();
 		model.put("max", max);
-		model.put("owner", owner);
-		model.put("cause", cause);
+		model.put(PROPIETARIO, owner);
+		model.put(CAUSA, cause);
 		model.put("date", date.toString());
 		model.put("donation", donation);
 
@@ -95,13 +93,13 @@ public class CauseController {
 
 		Cause cause = causeService.findCauseById(causeId);
 		if (donationService.validIsNumber(donation)) {
-			model.put("message", "Por favor, indique la cantidad con números enteros positivos");
+			model.put(MENSAJE, "Por favor, indique la cantidad con números enteros positivos");
 			return newDonation(causeId, model);
 		} else if(donationService.validEmptyDonation(donation)) {
-			model.put("message", "La donación no puede ser vacía");
+			model.put(MENSAJE, "La donación no puede ser vacía");
 			return newDonation(causeId, model);
 		}else if(donationService.validMaxDonation(donation, cause)) {
-			model.put("message", "La donación no puede ser mayor a la indicada");
+			model.put(MENSAJE, "La donación no puede ser mayor a la indicada");
 			return newDonation(causeId, model);
 		} else {
 			Integer ownerId = ownerService.getOwnerId();
@@ -112,9 +110,9 @@ public class CauseController {
 			Double amount = Double.valueOf(donation.getAmount());
 			cause.setGathered(cause.getGathered() + amount);
 			causeService.saveCause(cause);
-			model.addAttribute("message", "Donación creada con éxito");
-			model.addAttribute("owner", owner);
-			model.addAttribute("cause", cause);
+			model.addAttribute(MENSAJE, "Donación creada con éxito");
+			model.addAttribute(PROPIETARIO, owner);
+			model.addAttribute(CAUSA, cause);
 			return showCauseList(model);
 		}
 
@@ -126,8 +124,8 @@ public class CauseController {
 		Integer ownerId = ownerService.getOwnerId();
 		Owner owner = ownerService.findOwnerById(ownerId);
 		Cause cause = new Cause();
-		model.put("cause", cause);
-		model.put("owner", owner);
+		model.put(CAUSA, cause);
+		model.put(PROPIETARIO, owner);
 
 		return "causes/owners/editOrCreateCause";
 	}
@@ -135,24 +133,24 @@ public class CauseController {
 	@PostMapping(value = { "/myCauses/create" })
 	public String saveCause(Cause cause, Map<String, Object> model) {
 		if (causeService.validTargetIsNumber(cause)) {
-			model.put("message", "El objetivo debe ser un número");
+			model.put(MENSAJE, "El objetivo debe ser un número");
 			return newCause(model);
 		} else if (causeService.validEmptyCause(cause)) {
-			model.put("message", "Ningun campo debe estar vacío");
+			model.put(MENSAJE, "Ningun campo debe estar vacío");
 			return newCause(model);
 		} else if (causeService.validMinTarget(cause)) {
-			model.put("message", "El objetivo no puede ser menor que 200 euros");
+			model.put(MENSAJE, "El objetivo no puede ser menor que 200 euros");
 			return newCause(model);
 
 		} else {
 			Integer ownerId = ownerService.getOwnerId();
 			Owner owner = ownerService.findOwnerById(ownerId);
 			cause.setOwner(owner);
-			cause.setDonations(new HashSet<Donation>());
+			cause.setDonations(new HashSet<>());
 			causeService.saveCause(cause);
-			model.put("cause", cause);
-			model.put("owner", owner);
-			model.put("message", "Causa creada con éxito");
+			model.put(CAUSA, cause);
+			model.put(PROPIETARIO, owner);
+			model.put(MENSAJE, "Causa creada con éxito");
 
 			return showCauseList(model);
 		}
@@ -165,8 +163,8 @@ public class CauseController {
 		Integer ownerId = ownerService.getOwnerId();
 		Owner owner = ownerService.findOwnerById(ownerId);
 		Cause cause = causeService.findCauseById(causeId);
-		model.put("cause", cause);
-		model.put("owner", owner);
+		model.put(CAUSA, cause);
+		model.put(PROPIETARIO, owner);
 
 		return "causes/owners/editOrCreateCause";
 	}
@@ -178,13 +176,13 @@ public class CauseController {
 		Cause causeToUpdate = causeService.findCauseById(causeId);
 		
 		if (causeService.validTargetIsNumber(cause)) {
-			model.put("message", "El objetivo debe ser un número");
+			model.put(MENSAJE, "El objetivo debe ser un número");
 			return newCause(model);
 		} else if (causeService.validEmptyCause(cause)) {
-			model.put("message", "Ningun campo debe estar vacío");
+			model.put(MENSAJE, "Ningun campo debe estar vacío");
 			return newCause(model);
 		} else if (causeService.validMinTarget(cause)) {
-			model.put("message", "El objetivo no puede ser menor que 200 euros");
+			model.put(MENSAJE, "El objetivo no puede ser menor que 200 euros");
 			return newCause(model);
 
 		} else {
@@ -193,8 +191,8 @@ public class CauseController {
 			causeToUpdate.setNgo(cause.getNgo());
 			causeToUpdate.setTarget(cause.getTarget());
 			causeService.saveCause(causeToUpdate);
-			model.put("cause", cause);
-			model.put("message", "Causa editada con éxito");
+			model.put(CAUSA, cause);
+			model.put(MENSAJE, "Causa editada con éxito");
 
 			return showCauseList(model);
 		}
@@ -206,7 +204,7 @@ public class CauseController {
 	public String deleteCause(@PathVariable("causeId") int causeId, Map<String, Object> model) {
 		
 		causeRepository.delete(causeService.findCauseById(causeId));
-		model.put("message", "Causa eliminada correctamente");
+		model.put(MENSAJE, "Causa eliminada correctamente");
 
 		return showCauseList(model);
 	}

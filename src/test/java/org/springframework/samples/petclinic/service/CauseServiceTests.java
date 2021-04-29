@@ -12,7 +12,7 @@ import org.springframework.samples.petclinic.model.Cause;
 import org.springframework.stereotype.Service;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-public class CauseServiceTests {
+class CauseServiceTests {
 
 	@Autowired
 	protected CauseService causeService;
@@ -20,13 +20,13 @@ public class CauseServiceTests {
 	@Test
 	void shouldFindCauses() {
 		Collection<Cause> causes = this.causeService.findCauses();
-		assertThat(causes.size()).isEqualTo(4);
+		assertThat(causes).hasSize(4);
 	}
 	
 	@Test
 	void shouldFindUnfinishedCauses() {
 		Collection<Cause> causes = this.causeService.findUnfinishedCauses();
-		assertThat(causes.size()).isEqualTo(3);
+		assertThat(causes).hasSize(3);
 	}
 	
 	@Test

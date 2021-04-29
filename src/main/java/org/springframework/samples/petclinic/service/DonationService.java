@@ -1,9 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -44,8 +42,7 @@ private CauseRepository causeRepository;
 	
 	@Transactional(readOnly = true)
 	public Set<Donation> findDonationsByCauseId(int id) throws DataAccessException {
-		Set<Donation> donationsByCause =  causeRepository.findById(id).getDonations();
-		return donationsByCause;
+		return causeRepository.findById(id).getDonations();
 	}
 
 	@Transactional(readOnly = true)
