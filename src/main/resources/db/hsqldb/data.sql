@@ -29,7 +29,7 @@ INSERT INTO types VALUES (1, 'gato');
 INSERT INTO types VALUES (2, 'perro');
 INSERT INTO types VALUES (3, 'lagarto');
 INSERT INTO types VALUES (4, 'serpiente');
-INSERT INTO types VALUES (5, 'pájaro');
+INSERT INTO types VALUES (5, 'pajaro');
 INSERT INTO types VALUES (6, 'hamster');
 
 INSERT INTO owners VALUES (1, 'George', 'Franklin', '110 W. Liberty St.', 'Madison', '6085551023', 'owner1');
@@ -85,10 +85,10 @@ UPDATE pets
 SET adoption_id = 4
 WHERE id = 11;
 
-INSERT INTO adoption_requests(id,description,owner_id,adoption_id) VALUES (1,'Tengo 2 gatos más, me encantan',2,2);
-INSERT INTO adoption_requests(id,description,owner_id,adoption_id) VALUES (2,'Siempre he querido un hámster',1,1);
+INSERT INTO adoption_requests(id,description,owner_id,adoption_id) VALUES (1,'Tengo otros 4 gatos, me encantan',2,2);
+INSERT INTO adoption_requests(id,description,owner_id,adoption_id) VALUES (2,'Siempre he querido un hamster',1,1);
 INSERT INTO adoption_requests(id,description,owner_id,adoption_id) VALUES (3,'Otro gatito para la familia',1,3);
-INSERT INTO adoption_requests(id,description,owner_id,adoption_id) VALUES (4,'Tengo 2 gatos más, me requete-encantan',3,2);
+INSERT INTO adoption_requests(id,description,owner_id,adoption_id) VALUES (4,'Tengo otros 2 gatos, me requete-encantan',3,2);
 
 --Causes and donations
 INSERT INTO causes(id,name,description,target,ngo,gathered,owner_id) VALUES (1,'Construccion de refugios','Refugios para animales abandonados en verano', 3000, 'PerrONG', 700,1);
