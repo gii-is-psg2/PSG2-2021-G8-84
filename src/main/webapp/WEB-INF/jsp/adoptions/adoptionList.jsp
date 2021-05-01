@@ -6,7 +6,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="adoptions">
-    <h2>Adopciones</h2>
+    <h2>Adopciones disponibles</h2>
 
     <table id="adoptionsTable" class="table table-striped">
         <thead>
@@ -40,6 +40,28 @@
                   				<a href="${fn:escapeXml(requestUrl)}" class="btn btn-default">Petición de adopción</a>
                   			</c:if>
 						</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+    </table>
+    
+    <h2>Adopciones cerradas</h2>
+    <table id="adoptionsTable" class="table table-striped">
+        <thead>
+        <tr>
+            <th style="width: 150px;">Descripción</th>
+            <th style="width: 150px;">Nombre de la mascota</th>
+            <th style="width: 150px;">Tipo de mascota</th>
+            <th style="width: 150px;">Dueño original</th>
+        </tr>
+        </thead>
+        <tbody>
+			<c:forEach items="${closedAdoptions}" var="adoption">
+				<tr>
+					<td><c:out value="${adoption.description}" /></td>
+					<td><c:out value="${adoption.pet.name}" /></td>
+					<td><c:out value="${adoption.pet.type}" /></td>
+					<td><c:out value="${adoption.owner.firstName} ${adoption.owner.lastName}" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>

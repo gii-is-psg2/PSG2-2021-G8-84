@@ -12,6 +12,7 @@
         <form:form modelAttribute="adoption" class="form-horizontal">
         
 			<input type="hidden" name="ownerId" value="${owner.id}" />
+			<input type="hidden" name="closed" value="${adoption.closed}" />
             <div class="form-group has-feedback">
                 
                 <petclinic:inputField label="Descripción" name="description"/>

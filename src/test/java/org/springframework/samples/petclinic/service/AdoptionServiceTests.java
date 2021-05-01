@@ -24,14 +24,14 @@ class AdoptionServiceTests {
 	@Test
 	void shouldFindMyAdoptions() {
 		Owner owner = this.ownerService.findOwnerById(1);
-		Collection<Adoption> myAdoptions = this.adoptionService.findMyAdoptions(owner);
+		Collection<Adoption> myAdoptions = this.adoptionService.findMyOpenAdoptions(owner);
 		assertThat(myAdoptions).hasSize(1);
 	}
 	
 	@Test
 	void shouldFindOtherAdoptions() {
 		Owner owner = this.ownerService.findOwnerById(1);
-		Collection<Adoption> otherAdoptions = this.adoptionService.findOtherAdoptions(owner);
+		Collection<Adoption> otherAdoptions = this.adoptionService.findOtherOpenAdoptions(owner);
 		assertThat(otherAdoptions).hasSize(3);
 	}
 	
