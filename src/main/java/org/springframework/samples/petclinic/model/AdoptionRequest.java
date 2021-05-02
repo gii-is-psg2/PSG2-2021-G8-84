@@ -22,6 +22,7 @@ public class AdoptionRequest extends BaseEntity{
 	@JoinColumn(name = "adoption_id")
 	private Adoption adoption;
 	
+	private Boolean closed;
 	
 	// Getters y setters
 	public String getDescription() {
@@ -48,10 +49,16 @@ public class AdoptionRequest extends BaseEntity{
 		this.adoption = adoption;
 	}
 
+	public Boolean getClosed() {
+		return closed;
+	}
+
+	public void setClosed(Boolean closed) {
+		this.closed = closed;
+	}
+	
 	@Override
 	public String toString() {
 		return "AdoptionRequest [description=" + description + ", owner=" + owner + ", adoption=" + adoption + "]";
 	}
-	
-	
 }

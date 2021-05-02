@@ -32,7 +32,7 @@ public class Cause extends BaseEntity {
 	private String ngo;
 
 	@Min(value = 0)
-	private double gathered;
+	private Integer gathered;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cause")
 	private Set<Donation> donations;
@@ -76,11 +76,11 @@ public class Cause extends BaseEntity {
 		this.ngo = ngo;
 	}
 
-	public double getGathered() {
+	public Integer getGathered() {
 		return gathered;
 	}
 
-	public void setGathered(double gathered) {
+	public void setGathered(Integer gathered) {
 		this.gathered = gathered;
 	}
 	

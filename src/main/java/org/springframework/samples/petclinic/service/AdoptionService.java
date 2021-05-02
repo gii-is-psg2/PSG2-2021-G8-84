@@ -26,13 +26,23 @@ public class AdoptionService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<Adoption> findMyAdoptions(Owner owner) throws DataAccessException{
-		return this.adoptionRepository.findAdoptionsByOwner(owner);
+	public Collection<Adoption> findMyOpenAdoptions(Owner owner) throws DataAccessException{
+		return this.adoptionRepository.findOpenAdoptionsByOwner(owner);
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<Adoption> findOtherAdoptions(Owner owner) throws DataAccessException{
-		return this.adoptionRepository.findOthersAdoptionsByOwner(owner);
+	public Collection<Adoption> findMyClosedAdoptions(Owner owner) throws DataAccessException{
+		return this.adoptionRepository.findClosedAdoptionsByOwner(owner);
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Adoption> findOtherOpenAdoptions(Owner owner) throws DataAccessException{
+		return this.adoptionRepository.findOthersOpenAdoptionsByOwner(owner);
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Adoption> findOtherClosedAdoptions(Owner owner) throws DataAccessException{
+		return this.adoptionRepository.findOthersClosedAdoptionsByOwner(owner);
 	}
 	
 	@Transactional

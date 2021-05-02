@@ -30,7 +30,9 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.Collection;
 import org.springframework.beans.BeanUtils;
+import org.springframework.samples.petclinic.service.AdoptionService;
 import org.springframework.samples.petclinic.service.OwnerService;
+import org.springframework.samples.petclinic.service.PetHotelService;
 import org.springframework.samples.petclinic.service.PetService;
 import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
 
@@ -44,11 +46,15 @@ import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNam
 public class PetController {
 
 	private static final String VIEWS_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
-
+	
+	@Autowired
+	private PetHotelService hotelService;
 	@Autowired
 	private PetService petService;
 	@Autowired
 	private OwnerService ownerService;
+	@Autowired
+	private AdoptionService adoptionService;
 
 	@Autowired
 	public PetController(PetService petService, OwnerService ownerService) {
@@ -149,6 +155,12 @@ public class PetController {
 	public String deletePet(@PathVariable("petId") int petId) {
 		Owner owner = this.petService.findPetById(petId).getOwner();
 		Pet pet = this.petService.findPetById(petId);
+		if(hotelService.hasBooking(petId)) {
+		hotelService.deleteByPetId(petId);
+		}
+		Integer adopId = pet.getAdoption().getId();
+		pet.setAdoption(null);
+		adoptionService.deleteAdoptionById(adopId);
 		owner.removePet(pet);
 		petService.eliminarPet(petId);
 		return "redirect:/owners/" + owner.getId();

@@ -61,6 +61,10 @@ public class Pet extends NamedEntity {
 	
 	@OneToOne(cascade = CascadeType.ALL, optional = true)
 	private Adoption adoption;
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pet", fetch = FetchType.EAGER)
+	@JoinColumn(name = "hotel_id")
+	private Hotel hotel;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pet", fetch = FetchType.EAGER)
 	private Set<Visit> visits;
@@ -122,5 +126,19 @@ public class Pet extends NamedEntity {
 	public void setAdoption(Adoption adoption) {
 		this.adoption = adoption;
 	}
+
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
+
+	public void setVisits(Set<Visit> visits) {
+		this.visits = visits;
+	}
+	
+	
 
 }

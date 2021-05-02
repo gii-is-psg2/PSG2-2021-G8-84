@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -27,6 +28,7 @@ public class AdoptionRequestController {
 
 	private static final String ADOPTION_REQUEST_FORM = "adoptionRequests/newAdoptionRequest";
 	private static final String ADOP = "adoption";
+	private static final String DUENIO = "owner";
 	private static final String MY_REQUESTS = "redirect:/adoptions/my-requests";
 	
 	@Autowired
@@ -54,10 +56,11 @@ public class AdoptionRequestController {
 	public String initCreationForm(@PathVariable("adoptionId") int adoptionId, ModelMap model) {
 		Integer ownerId = this.oService.getOwnerId();
 		Owner owner = this.oService.findOwnerById(ownerId);
-		model.addAttribute("owner", owner);
+		model.addAttribute(DUENIO, owner);
 		Adoption adoption = this.aService.findAdoptionById(adoptionId);
 		model.addAttribute(ADOP,adoption);
 		AdoptionRequest ar = new AdoptionRequest();
+		ar.setClosed(false);
 		model.addAttribute("adoptionRequest", ar);
 		return ADOPTION_REQUEST_FORM;
 	}
@@ -87,7 +90,7 @@ public class AdoptionRequestController {
 			@PathVariable("arId") int arId, ModelMap model) {
 		Integer ownerId = this.oService.getOwnerId();
 		Owner owner = this.oService.findOwnerById(ownerId);
-		model.addAttribute("owner", owner);
+		model.addAttribute(DUENIO, owner);
 		Adoption adoption = this.aService.findAdoptionById(adoptionId);
 		model.addAttribute(ADOP,adoption);
 		AdoptionRequest ar = this.arService.findAdoptionRequestById(arId);
@@ -100,6 +103,11 @@ public class AdoptionRequestController {
 			@PathVariable("arId") int arId, @Valid AdoptionRequest ar, 
 			BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
+			Integer ownerId = this.oService.getOwnerId();
+			Owner owner = this.oService.findOwnerById(ownerId);
+			model.addAttribute(DUENIO, owner);
+			Adoption adoption = this.aService.findAdoptionById(adoptionId);
+			model.addAttribute(ADOP,adoption);
 			return ADOPTION_REQUEST_FORM;
 		}else {
 			ar.setId(arId);
@@ -127,8 +135,10 @@ public class AdoptionRequestController {
 	public String listMyRequests(ModelMap model) {
 		Integer ownerId = this.oService.getOwnerId();
 		Owner owner = this.oService.findOwnerById(ownerId);
-		Collection<AdoptionRequest> res = this.arService.findAdoptionRequestsByOwner(owner);
+		Collection<AdoptionRequest> res = this.arService.findOpenAdoptionRequestsByOwner(owner);
+		Collection<AdoptionRequest> res2 = this.arService.findClosedAdoptionRequestsByOwner(owner);
 		model.addAttribute("adoptionRequests", res);
+		model.addAttribute("closedRequests", res2);
 		return "adoptionRequests/requestsList";
 	}
 	
@@ -140,11 +150,19 @@ public class AdoptionRequestController {
 		AdoptionRequest ar = this.arService.findAdoptionRequestById(arId);
 		Owner newOwner = ar.getOwner();
 		Pet pet = ar.getAdoption().getPet();
+		Set<AdoptionRequest> arList = ar.getAdoption().getAdoptionRequests();
+		if(arList != null) {
+			for(AdoptionRequest a : arList) {
+				a.setClosed(true);
+				this.arService.saveAdoptionRequest(a);
+			}
+		}
 		oldOwner.removePet(pet);
 		newOwner.addPet(pet);
 		pet.setAdoption(null);
-		ar.getAdoption().setPet(null);
-		this.aService.deleteAdoptionById(adoptionId);
+		Adoption res = this.aService.findAdoptionById(adoptionId);
+		res.setClosed(true);
+		this.aService.saveAdoption(res);
 		
 		return "redirect:/adoptions/list-mine";
 	}
