@@ -43,10 +43,10 @@ public class PetHotelService {
 		return !numberOfBookings;
 	}
 	
-	public boolean BookingOnDate(Hotel hotel) {
+	public boolean BookingOnDate(Hotel hotel, Integer petId) {
 		List<Hotel> lista  = (List<Hotel>) hotelRepository.findAll();
-		List<LocalDate> startDates = lista.stream().map(x->x.getStartDate()).collect(Collectors.toList());
-		List<LocalDate> endDates = lista.stream().map(x->x.getEndDate()).collect(Collectors.toList());
+		List<LocalDate> startDates = lista.stream().filter(x->x.getPet().getId().equals(petId)).map(x->x.getStartDate()).collect(Collectors.toList());
+		List<LocalDate> endDates = lista.stream().filter(x->x.getPet().getId().equals(petId)).map(x->x.getEndDate()).collect(Collectors.toList());
 		boolean existBooking = false;
 		for(int i=0;i<startDates.size();i++) {
 			if(hotel.getStartDate().isEqual(startDates.get(i))){

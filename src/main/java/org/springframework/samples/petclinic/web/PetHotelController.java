@@ -60,15 +60,17 @@ public class PetHotelController {
 
 	@PostMapping("/new")
 	public String saveBooking(Hotel hotel, ModelMap model) {
+		
 		if(hotelService.notNull(hotel)) {
 			model.put("message", "Por favor, rellene todos los campos");
 			return newBooking(model);
 		}
-		else if(hotelService.petExistBooking(hotel)) {
-			model.put("message", "Esta mascota ya esta registrada en el hotel");
+		else if(hotelService.BookingOnDate(hotel, hotel.getPet().getId())) {
+			model.put("message", "Ya hay una reserva para "+hotel.getPet().getName()+" reserva en estas fechas");
 			return newBooking(model);
-		}else if(hotelService.BookingOnDate(hotel)) {
-			model.put("message", "Ya hay una reserva en estas fechas");
+		}
+		else if(hotelService.petExistBooking(hotel) ) {
+			model.put("message", "Esta mascota ya esta registrada en el hotel");
 			return newBooking(model);
 		}else if(hotelService.validDates(hotel)) {
 			model.put("message", "Las fechas deben ser posterior a hoy y la fecha de fin no puede ser anterior a la fecha de inicio");
