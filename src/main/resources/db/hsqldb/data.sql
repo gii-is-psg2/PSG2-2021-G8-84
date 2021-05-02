@@ -81,6 +81,11 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (2, 8, '2013-01-02',
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04', 'spayed');
 
+
+INSERT INTO hotel(id, end_date, start_date, owner_id, pet_id) VALUES (1, '2021-05-30', '2021-05-26', 2, 2);
+INSERT INTO hotel(id, end_date, start_date, owner_id, pet_id) VALUES (2, '2021-05-24', '2021-05-21', 3, 3);
+INSERT INTO hotel(id, end_date, start_date, owner_id, pet_id) VALUES (3, '2021-04-24', '2021-04-21', 4, 5);
+
 --Adoptions and adoption requests
 INSERT INTO adoptions(id,description,owner_id,pet_id,closed) VALUES (1, 'Hamster de 10 años', 2, 2, FALSE);
 INSERT INTO adoptions(id,description,owner_id,pet_id,closed) VALUES (2, 'Leo el gatito', 1, 1, FALSE);

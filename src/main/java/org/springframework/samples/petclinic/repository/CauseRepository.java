@@ -16,4 +16,7 @@ public interface CauseRepository extends CrudRepository<Cause, Integer>{
 	@Query("SELECT cause FROM Cause cause WHERE cause.target != cause.gathered ")
 	Collection<Cause> findUnfinishedCauses() throws DataAccessException;
 
+	@Query("SELECT cause FROM Cause cause WHERE cause.target = cause.gathered ")
+	Collection<Cause> findFinishedCauses();
+
 }

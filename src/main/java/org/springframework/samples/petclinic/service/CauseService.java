@@ -28,6 +28,11 @@ public class CauseService {
 	public Collection<Cause> findUnfinishedCauses() throws DataAccessException {
 		return causeRepository.findUnfinishedCauses();
 	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Cause> findFinishedCauses() throws DataAccessException {
+		return causeRepository.findFinishedCauses();
+	}
 
 	@Transactional
 	public void saveCause(Cause cause) throws DataAccessException {
