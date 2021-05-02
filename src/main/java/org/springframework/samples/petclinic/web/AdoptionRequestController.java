@@ -28,6 +28,7 @@ public class AdoptionRequestController {
 
 	private static final String ADOPTION_REQUEST_FORM = "adoptionRequests/newAdoptionRequest";
 	private static final String ADOP = "adoption";
+	private static final String DUENIO = "owner";
 	private static final String MY_REQUESTS = "redirect:/adoptions/my-requests";
 	
 	@Autowired
@@ -55,7 +56,7 @@ public class AdoptionRequestController {
 	public String initCreationForm(@PathVariable("adoptionId") int adoptionId, ModelMap model) {
 		Integer ownerId = this.oService.getOwnerId();
 		Owner owner = this.oService.findOwnerById(ownerId);
-		model.addAttribute("owner", owner);
+		model.addAttribute(DUENIO, owner);
 		Adoption adoption = this.aService.findAdoptionById(adoptionId);
 		model.addAttribute(ADOP,adoption);
 		AdoptionRequest ar = new AdoptionRequest();
@@ -89,7 +90,7 @@ public class AdoptionRequestController {
 			@PathVariable("arId") int arId, ModelMap model) {
 		Integer ownerId = this.oService.getOwnerId();
 		Owner owner = this.oService.findOwnerById(ownerId);
-		model.addAttribute("owner", owner);
+		model.addAttribute(DUENIO, owner);
 		Adoption adoption = this.aService.findAdoptionById(adoptionId);
 		model.addAttribute(ADOP,adoption);
 		AdoptionRequest ar = this.arService.findAdoptionRequestById(arId);
@@ -104,7 +105,7 @@ public class AdoptionRequestController {
 		if(result.hasErrors()) {
 			Integer ownerId = this.oService.getOwnerId();
 			Owner owner = this.oService.findOwnerById(ownerId);
-			model.addAttribute("owner", owner);
+			model.addAttribute(DUENIO, owner);
 			Adoption adoption = this.aService.findAdoptionById(adoptionId);
 			model.addAttribute(ADOP,adoption);
 			return ADOPTION_REQUEST_FORM;
@@ -159,7 +160,6 @@ public class AdoptionRequestController {
 		oldOwner.removePet(pet);
 		newOwner.addPet(pet);
 		pet.setAdoption(null);
-//		ar.getAdoption().setPet(null);
 		Adoption res = this.aService.findAdoptionById(adoptionId);
 		res.setClosed(true);
 		this.aService.saveAdoption(res);

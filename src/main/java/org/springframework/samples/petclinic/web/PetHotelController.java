@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/hotel")
 public class PetHotelController {
 
+	private static final String MENSAJE = "message";
+	
 	@Autowired
 	private OwnerService ownerService;
 	@Autowired
@@ -47,7 +49,7 @@ public class PetHotelController {
 		Integer ownerId = ownerService.getOwnerId();
 		Owner owner = ownerService.findOwnerById(ownerId);
 		if(owner.getPets().isEmpty()) {
-			model.put("message", "No puede crear una reserva por que no tiene ninguna mascota registrada");
+			model.put(MENSAJE, "No puede crear una reserva por que no tiene ninguna mascota registrada");
 			return bookingList(model);
 		}
 		List<Pet> pets = owner.getPets();
@@ -62,18 +64,18 @@ public class PetHotelController {
 	public String saveBooking(Hotel hotel, ModelMap model) {
 		
 		if(hotelService.notNull(hotel)) {
-			model.put("message", "Por favor, rellene todos los campos");
+			model.put(MENSAJE, "Por favor, rellene todos los campos");
 			return newBooking(model);
 		}
-		else if(hotelService.BookingOnDate(hotel, hotel.getPet().getId())) {
-			model.put("message", "Ya hay una reserva para "+hotel.getPet().getName()+" reserva en estas fechas");
+		else if(hotelService.bookingOnDate(hotel, hotel.getPet().getId())) {
+			model.put(MENSAJE, "Ya hay una reserva para "+hotel.getPet().getName()+" reserva en estas fechas");
 			return newBooking(model);
 		}
 		else if(hotelService.petExistBooking(hotel) ) {
-			model.put("message", "Esta mascota ya esta registrada en el hotel");
+			model.put(MENSAJE, "Esta mascota ya esta registrada en el hotel");
 			return newBooking(model);
 		}else if(hotelService.validDates(hotel)) {
-			model.put("message", "Las fechas deben ser posterior a hoy y la fecha de fin no puede ser anterior a la fecha de inicio");
+			model.put(MENSAJE, "Las fechas deben ser posterior a hoy y la fecha de fin no puede ser anterior a la fecha de inicio");
 			return newBooking(model);
 		}
 		else{
@@ -81,7 +83,7 @@ public class PetHotelController {
 			Owner owner = ownerService.findOwnerById(ownerId);
 			hotel.setOwner(owner);
 			petHotelRepo.save(hotel);
-			model.addAttribute("message", "Reserva creada con éxito");
+			model.addAttribute(MENSAJE, "Reserva creada con éxito");
 			model.addAttribute("owner", owner);
 
 			return bookingList(model);	

@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,11 @@ public class PetHotelService {
 	
 	public void deleteByPetId(Integer petId) {
 		List<Hotel> hotel = (List<Hotel>) hotelRepository.findAll();
-		Hotel pet = hotel.stream().filter(x->x.getPet().getId().equals(petId)).findFirst().get();
-		hotelRepository.delete(pet);
+		Optional<Hotel> pet = hotel.stream().filter(x->x.getPet().getId().equals(petId)).findFirst();
+		if(pet.isPresent()) {
+			Hotel petHotel = pet.get();
+			hotelRepository.delete(petHotel);
+		}
 	}
 
 	public boolean hasBooking(Integer petId) {
@@ -43,7 +47,7 @@ public class PetHotelService {
 		return !numberOfBookings;
 	}
 	
-	public boolean BookingOnDate(Hotel hotel, Integer petId) {
+	public boolean bookingOnDate(Hotel hotel, Integer petId) {
 		List<Hotel> lista  = (List<Hotel>) hotelRepository.findAll();
 		List<LocalDate> startDates = lista.stream().filter(x->x.getPet().getId().equals(petId)).map(x->x.getStartDate()).collect(Collectors.toList());
 		List<LocalDate> endDates = lista.stream().filter(x->x.getPet().getId().equals(petId)).map(x->x.getEndDate()).collect(Collectors.toList());

@@ -38,7 +38,7 @@ class PetHotelServiceTests {
 		hotel.setStartDate(fechaInicio);
 		hotel.setEndDate(fechaFinal);
 		
-		Boolean res = !hotelService.petExistBooking(hotel)&&!hotelService.notNull(hotel)&&!hotelService.BookingOnDate(hotel, hotel.getPet().getId())&&!hotelService.validDates(hotel);
+		Boolean res = !hotelService.petExistBooking(hotel)&&!hotelService.notNull(hotel)&&!hotelService.bookingOnDate(hotel, hotel.getPet().getId())&&!hotelService.validDates(hotel);
 		assertThat(res).isTrue();
 	}
 	
@@ -55,7 +55,7 @@ class PetHotelServiceTests {
 		hotel.setStartDate(fechaInicio);
 		hotel.setEndDate(fechaFinal);
 		
-		Boolean res = hotelService.petExistBooking(hotel)&&hotelService.notNull(hotel)&&hotelService.BookingOnDate(hotel, hotel.getPet().getId())&&hotelService.validDates(hotel);
+		Boolean res = hotelService.petExistBooking(hotel)&&hotelService.notNull(hotel)&&hotelService.bookingOnDate(hotel, hotel.getPet().getId())&&hotelService.validDates(hotel);
 		assertThat(res).isFalse();
 	}
 }
