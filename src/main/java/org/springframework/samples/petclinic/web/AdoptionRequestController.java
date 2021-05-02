@@ -102,6 +102,11 @@ public class AdoptionRequestController {
 			@PathVariable("arId") int arId, @Valid AdoptionRequest ar, 
 			BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
+			Integer ownerId = this.oService.getOwnerId();
+			Owner owner = this.oService.findOwnerById(ownerId);
+			model.addAttribute("owner", owner);
+			Adoption adoption = this.aService.findAdoptionById(adoptionId);
+			model.addAttribute(ADOP,adoption);
 			return ADOPTION_REQUEST_FORM;
 		}else {
 			ar.setId(arId);

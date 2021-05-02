@@ -11,11 +11,11 @@
 <petclinic:layout pageName="Causes">
 	<jsp:body>
         
-        <h3>Nueva causa: </h3></br></br>
+        <h2>Nueva causa: </h2>
         
         <form:form modelAttribute="cause" class="form-horizontal">
 			 <input type="hidden" name="ownerId" value="${owner.id}" />
-			 <input type="hidden" name="gathered" value="0.0" />
+			 <input type="hidden" name="gathered" value="0" />
             <div class="form-group has-feedback">
                 <petclinic:inputField label="Nombre" name="name" />
 				<petclinic:inputField label="Descripcion" name="description" />

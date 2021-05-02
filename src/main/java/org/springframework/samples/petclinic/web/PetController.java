@@ -30,6 +30,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.Collection;
 import org.springframework.beans.BeanUtils;
+import org.springframework.samples.petclinic.service.AdoptionService;
 import org.springframework.samples.petclinic.service.OwnerService;
 import org.springframework.samples.petclinic.service.PetHotelService;
 import org.springframework.samples.petclinic.service.PetService;
@@ -52,6 +53,8 @@ public class PetController {
 	private PetService petService;
 	@Autowired
 	private OwnerService ownerService;
+	@Autowired
+	private AdoptionService adoptionService;
 
 	@Autowired
 	public PetController(PetService petService, OwnerService ownerService) {
@@ -155,6 +158,9 @@ public class PetController {
 		if(hotelService.hasBooking(petId)) {
 		hotelService.deleteByPetId(petId);
 		}
+		Integer adopId = pet.getAdoption().getId();
+		pet.setAdoption(null);
+		adoptionService.deleteAdoptionById(adopId);
 		owner.removePet(pet);
 		petService.eliminarPet(petId);
 		return "redirect:/owners/" + owner.getId();
