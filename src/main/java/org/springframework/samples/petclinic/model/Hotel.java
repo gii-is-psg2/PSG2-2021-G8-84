@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,7 +25,7 @@ public class Hotel extends BaseEntity {
 		@DateTimeFormat(pattern = "yyyy/MM/dd")
 	    private LocalDate endDate;
 		
-	    @ManyToOne
+	    @OneToOne
 		@JoinColumn(name = "pet_id")
 		private Pet pet;
 	    

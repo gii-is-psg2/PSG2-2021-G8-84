@@ -60,6 +60,7 @@ public class AdoptionController {
 		model.put("owner", owner);
 		model.put("pets", pets);
 		Adoption adoption = new Adoption();
+		adoption.setClosed(false);
 		model.put("adoption", adoption);
 		return VIEWS_ADOPTION_CREATE_OR_UPDATE_FORM;
 	}
@@ -143,8 +144,10 @@ public class AdoptionController {
 	public String adoptionsList(ModelMap model) {
 		Integer ownerId = this.ownerService.getOwnerId();
 		Owner owner = this.ownerService.findOwnerById(ownerId);
-		Collection<Adoption> adoptions = this.adoptionService.findOtherAdoptions(owner);
-		model.addAttribute("adoptions",adoptions);
+		Collection<Adoption> openAdoptions = this.adoptionService.findOtherOpenAdoptions(owner);
+		Collection<Adoption> closedAdoptions = this.adoptionService.findOtherClosedAdoptions(owner);
+		model.addAttribute("adoptions",openAdoptions);
+		model.addAttribute("closedAdoptions", closedAdoptions);
 		model.addAttribute("mine", false);
 		return "adoptions/adoptionList";
 	}
@@ -153,8 +156,10 @@ public class AdoptionController {
 	public String adoptionsListMine(ModelMap model) {
 		Integer ownerId = this.ownerService.getOwnerId();
 		Owner owner = this.ownerService.findOwnerById(ownerId);
-		Collection<Adoption> adoptions = this.adoptionService.findMyAdoptions(owner);
+		Collection<Adoption> adoptions = this.adoptionService.findMyOpenAdoptions(owner);
+		Collection<Adoption> closedAdoptions = this.adoptionService.findMyClosedAdoptions(owner);
 		model.addAttribute("adoptions",adoptions);
+		model.addAttribute("closedAdoptions", closedAdoptions);
 		model.addAttribute("mine", true);
 		return "adoptions/adoptionList";
 	}

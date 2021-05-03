@@ -32,8 +32,13 @@ public class AdoptionRequestService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<AdoptionRequest> findAdoptionRequestsByOwner(Owner owner) throws DataAccessException{
-		return this.arRepository.findAdoptionRequestsByOwner(owner);
+	public Collection<AdoptionRequest> findOpenAdoptionRequestsByOwner(Owner owner) throws DataAccessException{
+		return this.arRepository.findOpenAdoptionRequestsByOwner(owner);
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<AdoptionRequest> findClosedAdoptionRequestsByOwner(Owner owner) throws DataAccessException{
+		return this.arRepository.findClosedAdoptionRequestsByOwner(owner);
 	}
 	
 	@Transactional

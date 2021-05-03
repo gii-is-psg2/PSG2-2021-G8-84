@@ -18,8 +18,11 @@ public interface AdoptionRequestRepository extends Repository<AdoptionRequest, I
 	
 	AdoptionRequest findAdoptionRequestById(int id) throws DataAccessException;
 	
-	@Query("SELECT ar FROM AdoptionRequest ar WHERE ar.owner = :owner")
-	Collection<AdoptionRequest> findAdoptionRequestsByOwner(@Param("owner") Owner owner) throws DataAccessException;
+	@Query("SELECT ar FROM AdoptionRequest ar WHERE ar.owner = :owner AND ar.closed = false")
+	Collection<AdoptionRequest> findOpenAdoptionRequestsByOwner(@Param("owner") Owner owner) throws DataAccessException;
+	
+	@Query("SELECT ar FROM AdoptionRequest ar WHERE ar.owner = :owner AND ar.closed = true")
+	Collection<AdoptionRequest> findClosedAdoptionRequestsByOwner(@Param("owner") Owner owner) throws DataAccessException;
 
 	@Query("SELECT ar FROM AdoptionRequest ar WHERE ar.adoption = :adoption")
 	Collection<AdoptionRequest> findAdoptionRequestsByAdoption(@Param("adoption") Adoption adoption) throws DataAccessException;

@@ -23,8 +23,8 @@
 			<c:forEach items="${hotels}" var="hotel">
 				<tr>
 					<td><c:out value="${hotel.owner.firstName}" /></td>
-					<td><c:out value="${hotel.pet}" /></a></td>
-					<td><c:out value="${hotel.startDate}" /></a></td>
+					<td><c:out value="${hotel.pet}" /></td>
+					<td><c:out value="${hotel.startDate}" /></td>
 					<td><c:out value="${hotel.endDate}" /></td>
 
 
@@ -40,6 +40,6 @@
     			
 			<spring:url value="/hotel/new" var="newBooking">
 			</spring:url>
-			<a class="btn btn-default" href="${fn:escapeXml(newBooking)}">Nueva</a>
+			<a class="btn btn-default" href="${fn:escapeXml(newBooking)}">Nueva reserva</a>
 </petclinic:layout>
 

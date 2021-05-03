@@ -46,7 +46,9 @@ public class CauseController {
 	@GetMapping(value = { "/causes" })
 	public String showCauseList(Map<String, Object> model) {
 		Collection<Cause> causes = causeService.findUnfinishedCauses();
+		Collection<Cause> completedCauses = causeService.findFinishedCauses();
 		model.put("causes", causes);
+		model.put("completedCauses", completedCauses);
 		return "causes/causeList";
 	}
 
@@ -107,7 +109,7 @@ public class CauseController {
 			donation.setOwner(owner);
 			donation.setCause(cause);
 			donationService.saveDonation(donation);
-			Double amount = Double.valueOf(donation.getAmount());
+			Integer amount = Integer.valueOf(donation.getAmount());
 			cause.setGathered(cause.getGathered() + amount);
 			causeService.saveCause(cause);
 			model.addAttribute(MENSAJE, "Donación creada con éxito");

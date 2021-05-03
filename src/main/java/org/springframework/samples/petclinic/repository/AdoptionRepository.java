@@ -19,10 +19,16 @@ public interface AdoptionRepository extends Repository<Adoption, Integer>{
 	
 	Adoption findAdoptionById(int id) throws DataAccessException;
 	
-	@Query("SELECT adoption FROM Adoption adoption WHERE adoption.owner = :owner")
-	Collection<Adoption> findAdoptionsByOwner(@Param("owner") Owner owner) throws DataAccessException;
+	@Query("SELECT adoption FROM Adoption adoption WHERE adoption.owner = :owner AND adoption.closed = false")
+	Collection<Adoption> findOpenAdoptionsByOwner(@Param("owner") Owner owner) throws DataAccessException;
 	
-	@Query("SELECT adoption FROM Adoption adoption WHERE adoption.owner != :owner")
-	Collection<Adoption> findOthersAdoptionsByOwner(@Param("owner") Owner owner) throws DataAccessException;
+	@Query("SELECT adoption FROM Adoption adoption WHERE adoption.owner = :owner AND adoption.closed = true")
+	Collection<Adoption> findClosedAdoptionsByOwner(@Param("owner") Owner owner) throws DataAccessException;
+	
+	@Query("SELECT adoption FROM Adoption adoption WHERE adoption.owner != :owner AND adoption.closed = false")
+	Collection<Adoption> findOthersOpenAdoptionsByOwner(@Param("owner") Owner owner) throws DataAccessException;
+	
+	@Query("SELECT adoption FROM Adoption adoption WHERE adoption.owner != :owner AND adoption.closed = true")
+	Collection<Adoption> findOthersClosedAdoptionsByOwner(@Param("owner") Owner owner) throws DataAccessException;
 	
 }

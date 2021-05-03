@@ -29,6 +29,8 @@ public class Adoption extends BaseEntity{
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "adoption")
 	private Set<AdoptionRequest> adoptionRequests;
 	
+	private Boolean closed;
+	
 	// Getters y setters
 	public String getDescription() {
 		return description;
@@ -60,6 +62,14 @@ public class Adoption extends BaseEntity{
 
 	public void setAdoptionRequests(Set<AdoptionRequest> adoptionRequests) {
 		this.adoptionRequests = adoptionRequests;
+	}
+
+	public Boolean getClosed() {
+		return closed;
+	}
+
+	public void setClosed(Boolean closed) {
+		this.closed = closed;
 	}
 
 	@Override

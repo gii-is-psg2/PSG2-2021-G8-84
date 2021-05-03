@@ -36,7 +36,9 @@ import org.springframework.samples.petclinic.configuration.SecurityConfiguration
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
+import org.springframework.samples.petclinic.service.AdoptionService;
 import org.springframework.samples.petclinic.service.OwnerService;
+import org.springframework.samples.petclinic.service.PetHotelService;
 import org.springframework.samples.petclinic.service.PetService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -60,11 +62,16 @@ class PetControllerTests {
 	@Autowired
 	private PetController petController;
 
+	@MockBean
+	private PetHotelService hotelService;
+	
+	@MockBean
+	private AdoptionService adoptionService;
 
 	@MockBean
 	private PetService petService;
         
-        @MockBean
+    @MockBean
 	private OwnerService ownerService;
 
 	@Autowired

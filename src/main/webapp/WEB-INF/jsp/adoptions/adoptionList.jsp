@@ -6,7 +6,12 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="adoptions">
-    <h2>Adopciones</h2>
+    <c:if test="${mine == false}">
+        <h2>Adopciones disponibles</h2>
+    </c:if>
+    <c:if test="${mine == true}">
+        <h2>Mis adopciones disponibles</h2>
+    </c:if>
 
     <table id="adoptionsTable" class="table table-striped">
         <thead>
@@ -44,7 +49,44 @@
 			</c:forEach>
 		</tbody>
     </table>
+    
+    <c:if test="${mine == false}">
+        <h2>Adopciones cerradas</h2>
+    </c:if>
+    <c:if test="${mine == true}">
+        <h2>Mis adopciones cerradas</h2>
+    </c:if>
+    
+    <table id="adoptionsTable" class="table table-striped">
+        <thead>
+        <tr>
+            <th style="width: 150px;">Descripción</th>
+            <th style="width: 150px;">Nombre de la mascota</th>
+            <th style="width: 150px;">Tipo de mascota</th>
+            <th style="width: 150px;">Dueño original</th>
+        </tr>
+        </thead>
+        <tbody>
+			<c:forEach items="${closedAdoptions}" var="adoption">
+				<tr>
+					<td><c:out value="${adoption.description}" /></td>
+					<td><c:out value="${adoption.pet.name}" /></td>
+					<td><c:out value="${adoption.pet.type}" /></td>
+					<td><c:out value="${adoption.owner.firstName} ${adoption.owner.lastName}" /></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+    </table>
     			
 	<spring:url value="/adoptions/new" var="newAdoption"></spring:url>
 	<a class="btn btn-default" href="${fn:escapeXml(newAdoption)}">Poner una mascota en adopción</a>
+	
+	<c:if test="${mine == false}">  
+		<spring:url value="/adoptions/list-mine" var="myAdoptions"></spring:url>
+		<a class="btn btn-default" href="${fn:escapeXml(myAdoptions)}">Ver mis adopciones</a>
+    </c:if>
+    <c:if test="${mine == true}">
+        <spring:url value="/adoptions/list" var="otherAdoptions"></spring:url>
+		<a class="btn btn-default" href="${fn:escapeXml(otherAdoptions)}">Ver adopciones ajenas</a>
+    </c:if>
 </petclinic:layout>
