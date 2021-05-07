@@ -28,7 +28,7 @@ In the retrospective meeting, the team has a discussion about those results.
 | :fearful:         |      I´m desperate, I need help        |
 
 
-## Sprint Template
+## Sprint 3
 
 | Day           | Abraham Cobelo    | Hernán González  | Manuel García     | Antonio Luis Santervás    | Antonio Viñuelas     | 
 | ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | 
@@ -39,5 +39,11 @@ In the retrospective meeting, the team has a discussion about those results.
 | Day 5        |       :neutral_face:         |  :neutral_face:  |      :neutral_face:          |   :smiley:    |    :neutral_face:      | 
 | Day 6        |       :smiley:       |  :smiley:        |                | :smiley:  |     :neutral_face:     | 
 | Day 7        |      :neutral_face:          |          |                |   :smiley:    |    :smiley:      | 
-| Day 8        |              |          |                |       |         | 
-| Day 9        |              |          |                |       |         | 
+
+## Sprint 4
+
+| Day           | Abraham Cobelo    | Hernán González  | Manuel García     | Antonio Luis Santervás    | Antonio Viñuelas     | 
+| ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | 
+| Day 1   |    :fearful:     |    :fearful:    |    :fearful:     |   :fearful:     |       :fearful:       | 
+| Day 2   |             |       |              |             |          |   
+| Day 3   |             |       |              |             |          | 
