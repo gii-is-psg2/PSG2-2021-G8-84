@@ -45,5 +45,5 @@ In the retrospective meeting, the team has a discussion about those results.
 | Day           | Abraham Cobelo    | Hernán González  | Manuel García     | Antonio Luis Santervás    | Antonio Viñuelas     | 
 | ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | 
 | Day 1   |    :fearful:     |    :fearful:    |    :fearful:     |   :fearful:     |       :fearful:       | 
-| Day 2   |             |       |              |             |          |   
+| Day 2   |             |       |              |   :smiley:  |          |   
 | Day 3   |             |       |              |             |          | 
