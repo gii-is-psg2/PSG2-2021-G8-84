@@ -46,4 +46,4 @@ In the retrospective meeting, the team has a discussion about those results.
 | ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | 
 | Day 1   |    :fearful:     |    :fearful:    |    :fearful:     |   :fearful:     |       :fearful:       | 
 | Day 2   |             |       |   :smiley:           |   :smiley:  |          |   
-| Day 3   |             |       |              |             |          | 
+| Day 3   |             |       |    :smiley:          |             |          | 
