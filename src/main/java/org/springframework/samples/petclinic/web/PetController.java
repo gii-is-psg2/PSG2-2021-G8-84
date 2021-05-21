@@ -157,10 +157,11 @@ public class PetController {
 		Pet pet = this.petService.findPetById(petId);
 		if(hotelService.hasBooking(petId)) {
 		hotelService.deleteByPetId(petId);
-		}
+		}	
+		if(pet.getAdoption() != null) {
 		Integer adopId = pet.getAdoption().getId();
-		pet.setAdoption(null);
 		adoptionService.deleteAdoptionById(adopId);
+		}		
 		owner.removePet(pet);
 		petService.eliminarPet(petId);
 		return "redirect:/owners/" + owner.getId();
