@@ -65,7 +65,7 @@ private CauseRepository causeRepository;
 	
 	public boolean validIsNumber(Donation donation) {
 
-		return !donation.getAmount().matches("[0-9]*");
+		return !donation.getAmount().matches("^\\d*\\.?\\d{2}$");
 	}
 
 }

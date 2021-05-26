@@ -18,7 +18,8 @@
 			 <input type="hidden" name="date" value="${date}" />
             <div class="form-group has-feedback">
                 <petclinic:inputField label="Cantidad"
-					name="amount" />
+					name="amount"/>
+				<p>Por favor, introduzca los céntimos también, utilice un punto para ello.</p>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">                         
