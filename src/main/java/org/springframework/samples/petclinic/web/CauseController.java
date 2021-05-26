@@ -109,7 +109,7 @@ public class CauseController {
 			donation.setOwner(owner);
 			donation.setCause(cause);
 			donationService.saveDonation(donation);
-			Integer amount = Integer.valueOf(donation.getAmount());
+			Double amount = Double.valueOf(donation.getAmount());
 			cause.setGathered(cause.getGathered() + amount);
 			causeService.saveCause(cause);
 			model.addAttribute(MENSAJE, "Donación creada con éxito");
