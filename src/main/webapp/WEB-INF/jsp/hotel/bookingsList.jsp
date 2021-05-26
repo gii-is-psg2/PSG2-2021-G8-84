@@ -14,7 +14,7 @@
             <th style="width: 150px;">Nombre</th>
             <th style="width: 150px;">Nombre de la mascota</th>
             <th style="width: 150px;">Fecha de inicio</th>
-            <th style="width: 150px;">Fecha fin</th>
+            <th style="width: 150px;">Fecha de fin</th>
         </tr>
         </thead>
         <tbody>
