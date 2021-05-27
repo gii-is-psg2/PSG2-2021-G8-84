@@ -42,6 +42,7 @@ public class OwnerController {
 
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
 	private static final String URL_PROPIETARIO = "redirect:/owners/";
+	private static final String MENSAJE = "message";
 
 	private final OwnerService ownerService;
 
@@ -63,7 +64,12 @@ public class OwnerController {
 	}
 
 	@PostMapping(value = "/owners/new")
-	public String processCreationForm(@Valid Owner owner, BindingResult result) {
+	public String processCreationForm(@Valid Owner owner, BindingResult result, Map<String, Object> model) {
+		if (owner.getFirstName().isEmpty() || owner.getLastName().isEmpty()) {
+			model.put(MENSAJE, "Ni el nombre ni el apellido pueden estar vacíos.");
+			return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
+		}
+		
 		if (result.hasErrors()) {
 			return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 		} else {
